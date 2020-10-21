@@ -1,4 +1,5 @@
 const CarNotDefinedError = require('./error/carNotDefinedError');
+const CarIdNotDefinedError = require('./error/carIdNotDefinedError');
 
 class CarService {
   /**
@@ -15,6 +16,15 @@ class CarService {
 
     const savedCar = await this.carRepository.save(car);
     return savedCar;
+  }
+
+  async getById(id) {
+    if (!id) {
+      throw new CarIdNotDefinedError('An id is required to fetch a record from the database');
+    }
+
+    const car = await this.carRepository.getById(id);
+    return car;
   }
 
   async getAll() {

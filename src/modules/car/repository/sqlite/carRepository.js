@@ -1,5 +1,6 @@
 const AbstractCarRepository = require('./abstractRepository');
 const { fromModelToEntity } = require('../../mapper/carMapper');
+const CarNotFoundError = require('../error/CarNotFoundError');
 
 class CarRepository extends AbstractCarRepository {
   /**
@@ -14,18 +15,56 @@ class CarRepository extends AbstractCarRepository {
    * @param {import('../../entity/car')} car
    */
   async save(car) {
-    const carData = await this.CarModel.create({
-      brand: car.brand,
-      model: car.model,
-      year: car.year,
-      kmh: car.kmh,
-      color: car.color,
-      airConditioner: car.airConditioner,
-      passengers: car.passengers,
-      transmission: car.transmission,
-    });
-    const savedCar = fromModelToEntity(carData);
+    const isUpdate = car.id;
+    let carId;
+
+    if (isUpdate) {
+      const [affectedRows] = await this.CarModel.update(
+        {
+          brand: car.brand,
+          model: car.model,
+          year: car.year,
+          kmh: car.kmh,
+          color: car.color,
+          airConditioner: car.airConditioner,
+          passengers: car.passengers,
+          transmission: car.transmission,
+        },
+        {
+          where: {
+            id: car.id,
+          },
+        }
+      );
+
+      if (affectedRows === 0) {
+        throw new CarNotFoundError(`Car with id ${car.id} doesn't exist`);
+      }
+
+      carId = car.id;
+    } else {
+      const carData = await this.CarModel.create({
+        brand: car.brand,
+        model: car.model,
+        year: car.year,
+        kmh: car.kmh,
+        color: car.color,
+        airConditioner: car.airConditioner,
+        passengers: car.passengers,
+        transmission: car.transmission,
+      });
+
+      carId = carData.id;
+    }
+
+    const savedCar = await this.getById(carId);
     return savedCar;
+  }
+
+  async getById(id) {
+    const carData = await this.CarModel.findByPk(id);
+    const car = fromModelToEntity(carData);
+    return car;
   }
 
   async getAll() {

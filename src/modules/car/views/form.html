@@ -5,38 +5,42 @@
     <div class="p-5">
       <div class="columns is-1 is-centered">
         <div class="column is-half">
+          {% if car.id %}
+            <input type="hidden" value="{{ car.id }}" name="id" readonly/>
+          {% endif %}
+          
           <div class="field">
             <label class="label" for="brand">Brand</label>
             <div class="control">
-              <input class="input" id="brand" name="brand" type="text" required/>
+              <input class="input" id="brand" name="brand" type="text" value="{{ car.brand }}" placeholder="{{ car.brand }}" required/>
             </div>
           </div>
       
           <div class="field">
             <label class="label" for="model">Model</label>
             <div class="control">
-              <input class="input" id="model" name="model" type="text" required/>
+              <input class="input" id="model" name="model" type="text" value="{{ car.model }}" placeholder="{{ car.model }}" required/>
             </div>
           </div>
       
           <div class="field">
             <label class="label" for="year">Year</label>
             <div class="control">
-              <input class="input" id="year" name="year" type="number" required/>
+              <input class="input" id="year" name="year" type="number" value="{{ car.year }}" placeholder="{{ car.year }}" required/>
             </div>
           </div>
       
           <div class="field">
             <label class="label" for="kmh">KmH</label>
             <div class="control">
-              <input class="input" id="kmh" name="kmh" type="number" required/>
+              <input class="input" id="kmh" name="kmh" type="number" value="{{ car.kmh }}" placeholder="{{ car.kmh }}" required/>
             </div>
           </div>
           
           <div class="field">
             <label class="label" for="color">Color</label>
             <div class="control">
-              <input class="input" id="color" name="color" type="text" required/>
+              <input class="input" id="color" name="color" type="text" value="{{ car.color }}" placeholder="{{ car.color }}" required/>
             </div>
           </div>
 
@@ -44,11 +48,11 @@
             <label class="label">A/C</label>
             <div class="control">
               <label class="radio">
-                <input type="radio" name="air-conditioner" value="1" required/>
+                <input type="radio" name="air-conditioner" value="1" {{ "checked" if car.airConditioner === true }} required/>
                 Yes
               </label>
               <label class="radio">
-                <input type="radio" name="air-conditioner" value="" required/>
+                <input type="radio" name="air-conditioner" value="" {{ "checked" if car.airConditioner === false }} required/>
                 No
               </label>
             </div>
@@ -57,7 +61,7 @@
           <div class="field">
             <label class="label" for="passengers">Passengers</label>
             <div class="control">
-              <input class="input" id="passengers" name="passengers" type="number" required/>
+              <input class="input" id="passengers" name="passengers" type="number" value="{{ car.passengers }}" placeholder="{{ car.passengers }}" required/>
             </div>
           </div>
 
@@ -65,11 +69,11 @@
             <label class="label">Transmission</label>
             <div class="control">
               <label class="radio">
-                <input type="radio" name="transmission" value="manual" required/>
+                <input type="radio" name="transmission" value="manual" {{ "checked" if car.transmission === "manual" }} required/>
                 Manual
               </label>
               <label class="radio">
-                <input type="radio" name="transmission" value="automatic" required/>
+                <input type="radio" name="transmission" value="automatic" {{ "checked" if car.transmission === "automatic" }} required/>
                 Automatic
               </label>
             </div>
@@ -77,7 +81,11 @@
       
           <div class="field mt-5">
             <div class="control has-text-centered">
-              <button class="button is-primary">Add car</button>
+              {% if car.id %}
+                <button class="button is-primary">Update Record</button>
+              {% else %}
+                <button class="button is-primary">Save Record</button>
+              {% endif %}
             </div>
           </div>
         </div>

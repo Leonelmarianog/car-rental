@@ -20,6 +20,8 @@
           <th>Transmission</th>
           <th>Created At</th>
           <th>Last Updated</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -36,6 +38,16 @@
           <td>{{ car.transmission }}</td>
           <td>{{ car.createdAt }}</td>
           <td>{{ car.lastUpdated }}</td>
+          <td>
+            <a href="/car/update/{{ car.id }}" class="button is-warning">
+              <i class="fas fa-edit"></i>
+            </a>
+          </td>
+          <td>
+            <a href="#" class="button is-danger">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
