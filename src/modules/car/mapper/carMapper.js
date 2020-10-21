@@ -23,7 +23,17 @@ function fromDataToEntity({
   passengers,
   transmission,
 }) {
-  return new Car({ id, brand, model, year, kmh, color, airConditioner, passengers, transmission });
+  return new Car({
+    id: Number(id),
+    brand,
+    model,
+    year: Number(year),
+    kmh: Number(kmh),
+    color,
+    airConditioner: Boolean(airConditioner),
+    passengers: Number(passengers),
+    transmission,
+  });
 }
 
 module.exports = {
