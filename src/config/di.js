@@ -46,6 +46,7 @@ function addCommonDefinitions(container) {
     Sequelize: factory(configureMainSequelizeDatabase),
   });
 }
+
 /**
  * @param {DIContainer} container
  */

@@ -13,6 +13,7 @@ class CarRepository extends AbstractCarRepository {
 
   /**
    * @param {import('../../entity/car')} car
+   * @returns {Promise<import('../../entity/car')>}
    */
   async save(car) {
     const isUpdate = car.id;
@@ -61,12 +62,19 @@ class CarRepository extends AbstractCarRepository {
     return savedCar;
   }
 
+  /**
+   * @param {Number} id
+   * @returns {Promise<import('../../entity/car')>}
+   */
   async getById(id) {
     const carData = await this.CarModel.findByPk(id);
     const car = fromModelToEntity(carData);
     return car;
   }
 
+  /**
+   * @returns {Promise<Array<import('../../entity/car')>>}
+   */
   async getAll() {
     const carsData = await this.CarModel.findAll();
     const cars = carsData.map((carData) => fromModelToEntity(carData));

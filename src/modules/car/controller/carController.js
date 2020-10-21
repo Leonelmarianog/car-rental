@@ -13,6 +13,9 @@ class CarController extends AbstractController {
     this.BASE_ROUTE = '/car';
   }
 
+  /**
+   * @param {import('express').Application} app
+   */
   configureRoutes(app) {
     app.get(`${this.BASE_ROUTE}`, this.index.bind(this));
     app.get(`${this.BASE_ROUTE}/create`, this.create.bind(this));
@@ -20,23 +23,38 @@ class CarController extends AbstractController {
     app.get(`${this.BASE_ROUTE}/update/:carId`, this.update.bind(this));
   }
 
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
   async index(req, res) {
     const cars = await this.carService.getAll();
     res.render('car/views/index.html', { cars });
   }
 
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
   create(req, res) {
     res.render('car/views/form.html');
   }
 
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
   async save(req, res) {
     const carData = { ...req.body };
-    console.log(carData);
     const car = fromDataToEntity(carData);
     await this.carService.save(car);
     res.redirect(this.BASE_ROUTE);
   }
 
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
   async update(req, res) {
     const { carId } = req.params;
     const car = await this.carService.getById(carId);
