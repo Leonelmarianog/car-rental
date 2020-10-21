@@ -18,6 +18,13 @@ function setBodyParser(app) {
 /**
  * @param {import('express').Application} app
  */
+function setStaticFolder(app) {
+  app.use('/public', express.static('public'));
+}
+
+/**
+ * @param {import('express').Application} app
+ */
 function setBaseRoute(app) {
   app.get('/', (req, res) => {
     res.redirect('/car');
@@ -38,6 +45,7 @@ function initExpressApp(app, port) {
 module.exports = {
   createExpressApp,
   setBodyParser,
+  setStaticFolder,
   setBaseRoute,
   initExpressApp,
 };

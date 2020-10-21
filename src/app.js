@@ -5,6 +5,7 @@ const setViewEngine = require('./config/viewEngine');
 const {
   createExpressApp,
   setBodyParser,
+  setStaticFolder,
   setBaseRoute,
   initExpressApp,
 } = require('./config/express');
@@ -16,6 +17,7 @@ const container = configureDI();
 
 setViewEngine(app, container);
 setBodyParser(app);
+setStaticFolder(app);
 setBaseRoute(app);
 initCarModule(app, container);
 initExpressApp(app, PORT);

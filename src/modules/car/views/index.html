@@ -1,38 +1,38 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-  <table>
-    <thead>
-      <tr>
-        <td>ID</td>
-        <td>Brand</td>
-        <td>Model</td>
-        <td>Year</td>
-        <td>KmH</td>
-        <td>Color</td>
-        <td>Air Conditioner</td>
-        <td>Passengers</td>
-        <td>Transmission</td>
-        <td>Created At</td>
-        <td>Last Updated</td>
-      </tr>
-    </thead>
-    <tbody>
-      {% for car in cars %}
-      <tr>
-        <td>{{ car.id }}</td>
-        <td>{{ car.brand }}</td>
-        <td>{{ car.model }}</td>
-        <td>{{ car.year }}</td>
-        <td>{{ car.kmh }}</td>
-        <td>{{ car.color }}</td>
-        <td>{{ car.airConditioner }}</td>
-        <td>{{ car.passengers }}</td>
-        <td>{{ car.transmission }}</td>
-        <td>{{ car.createdAt }}</td>
-        <td>{{ car.lastUpdated }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<table class="table has-text-centered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Year</th>
+      <th>KmH</th>
+      <th>Color</th>
+      <th>A/C</th>
+      <th>Passengers</th>
+      <th>Transmission</th>
+      <th>Created At</th>
+      <th>Last Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for car in cars %}
+    <tr>
+      <td>{{ car.id }}</td>
+      <td>{{ car.brand }}</td>
+      <td>{{ car.model }}</td>
+      <td>{{ car.year }}</td>
+      <td>{{ car.kmh }}</td>
+      <td>{{ car.color }}</td>
+      <td>{{ "yes" if car.airConditioner else "no" }}</td>
+      <td>{{ car.passengers }}</td>
+      <td>{{ car.transmission }}</td>
+      <td>{{ car.createdAt }}</td>
+      <td>{{ car.lastUpdated }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
