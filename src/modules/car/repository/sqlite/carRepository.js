@@ -10,6 +10,24 @@ class CarRepository extends AbstractCarRepository {
     this.CarModel = CarModel;
   }
 
+  /**
+   * @param {import('../../entity/car')} car
+   */
+  async save(car) {
+    const carData = await this.CarModel.create({
+      brand: car.brand,
+      model: car.model,
+      year: car.year,
+      kmh: car.kmh,
+      color: car.color,
+      airConditioner: car.airConditioner,
+      passengers: car.passengers,
+      transmission: car.transmission,
+    });
+    const savedCar = fromModelToEntity(carData);
+    return savedCar;
+  }
+
   async getAll() {
     const carsData = await this.CarModel.findAll();
     const cars = carsData.map((carData) => fromModelToEntity(carData));

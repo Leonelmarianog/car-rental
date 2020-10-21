@@ -1,38 +1,44 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-<table class="table has-text-centered">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Brand</th>
-      <th>Model</th>
-      <th>Year</th>
-      <th>KmH</th>
-      <th>Color</th>
-      <th>A/C</th>
-      <th>Passengers</th>
-      <th>Transmission</th>
-      <th>Created At</th>
-      <th>Last Updated</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for car in cars %}
-    <tr>
-      <td>{{ car.id }}</td>
-      <td>{{ car.brand }}</td>
-      <td>{{ car.model }}</td>
-      <td>{{ car.year }}</td>
-      <td>{{ car.kmh }}</td>
-      <td>{{ car.color }}</td>
-      <td>{{ "yes" if car.airConditioner else "no" }}</td>
-      <td>{{ car.passengers }}</td>
-      <td>{{ car.transmission }}</td>
-      <td>{{ car.createdAt }}</td>
-      <td>{{ car.lastUpdated }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <div class="container py-5">
+    <div class="has-text-centered mb-5">
+      <a class="button is-primary" href="/car/create">Add New Record</a>
+    </div>
+    
+    <table class="table has-text-centered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Year</th>
+          <th>KmH</th>
+          <th>Color</th>
+          <th>A/C</th>
+          <th>Passengers</th>
+          <th>Transmission</th>
+          <th>Created At</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in cars %}
+        <tr>
+          <td>{{ car.id }}</td>
+          <td>{{ car.brand }}</td>
+          <td>{{ car.model }}</td>
+          <td>{{ car.year }}</td>
+          <td>{{ car.kmh }}</td>
+          <td>{{ car.color }}</td>
+          <td>{{ "yes" if car.airConditioner else "no" }}</td>
+          <td>{{ car.passengers }}</td>
+          <td>{{ car.transmission }}</td>
+          <td>{{ car.createdAt }}</td>
+          <td>{{ car.lastUpdated }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

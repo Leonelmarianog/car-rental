@@ -8,6 +8,25 @@ function fromModelToEntity(modelInstance) {
   return new Car(modelInstance.toJSON());
 }
 
+/**
+ * @param {Object} - Form data
+ * @returns {Car} - Car Entity
+ */
+function fromDataToEntity({
+  id,
+  brand,
+  model,
+  year,
+  kmh,
+  color,
+  'air-conditioner': airConditioner,
+  passengers,
+  transmission,
+}) {
+  return new Car({ id, brand, model, year, kmh, color, airConditioner, passengers, transmission });
+}
+
 module.exports = {
   fromModelToEntity,
+  fromDataToEntity,
 };

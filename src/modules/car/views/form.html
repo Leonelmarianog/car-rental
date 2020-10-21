@@ -1,0 +1,87 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+  <form action="/car/save" method="POST">
+    <div class="p-5">
+      <div class="columns is-1 is-centered">
+        <div class="column is-half">
+          <div class="field">
+            <label class="label" for="brand">Brand</label>
+            <div class="control">
+              <input class="input" id="brand" name="brand" type="text" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="model">Model</label>
+            <div class="control">
+              <input class="input" id="model" name="model" type="text" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="year">Year</label>
+            <div class="control">
+              <input class="input" id="year" name="year" type="text" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="kmh">KmH</label>
+            <div class="control">
+              <input class="input" id="kmh" name="kmh" type="text" required/>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label" for="color">Color</label>
+            <div class="control">
+              <input class="input" id="color" name="color" type="text" required/>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">A/C</label>
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="air-conditioner" value="yes" required/>
+                Yes
+              </label>
+              <label class="radio">
+                <input type="radio" name="air-conditioner" value="no" required/>
+                No
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="passengers">Passengers</label>
+            <div class="control">
+              <input class="input" id="passengers" name="passengers" type="text" required/>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Transmission</label>
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="transmission" value="manual" required/>
+                Manual
+              </label>
+              <label class="radio">
+                <input type="radio" name="transmission" value="automatic" required/>
+                Automatic
+              </label>
+            </div>
+          </div>
+      
+          <div class="field mt-5">
+            <div class="control has-text-centered">
+              <button class="button is-primary">Add car</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
