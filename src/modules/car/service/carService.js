@@ -24,6 +24,19 @@ class CarService {
 
   /**
    * @param {Number} id
+   * @returns {Boolean}
+   */
+  async delete(id) {
+    if (!id) {
+      throw new CarIdNotDefinedError('An id is required to delete a Car');
+    }
+
+    const isDeleted = await this.carRepository.delete(id);
+    return isDeleted;
+  }
+
+  /**
+   * @param {Number} id
    * @returns {Promise<import('../../entity/car')>}
    */
   async getById(id) {

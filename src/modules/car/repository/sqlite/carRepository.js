@@ -64,6 +64,20 @@ class CarRepository extends AbstractCarRepository {
 
   /**
    * @param {Number} id
+   * @returns {Boolean}
+   */
+  async delete(id) {
+    const deletedRows = await this.CarModel.destroy({ where: { id } });
+
+    if (deletedRows === 0) {
+      throw new CarNotFoundError(`Car with id ${id} doesn't exist`);
+    }
+
+    return true;
+  }
+
+  /**
+   * @param {Number} id
    * @returns {Promise<import('../../entity/car')>}
    */
   async getById(id) {

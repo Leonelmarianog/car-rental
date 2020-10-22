@@ -21,6 +21,7 @@ class CarController extends AbstractController {
     app.get(`${this.BASE_ROUTE}/create`, this.create.bind(this));
     app.post(`${this.BASE_ROUTE}/save`, this.save.bind(this));
     app.get(`${this.BASE_ROUTE}/update/:carId`, this.update.bind(this));
+    app.get(`${this.BASE_ROUTE}/delete/:carId`, this.delete.bind(this));
   }
 
   /**
@@ -59,6 +60,16 @@ class CarController extends AbstractController {
     const { carId } = req.params;
     const car = await this.carService.getById(carId);
     res.render('car/views/form.html', { car });
+  }
+
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
+  async delete(req, res) {
+    const { carId } = req.params;
+    await this.carService.delete(carId);
+    res.redirect(this.BASE_ROUTE);
   }
 }
 
