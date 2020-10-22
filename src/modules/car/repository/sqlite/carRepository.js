@@ -39,7 +39,7 @@ class CarRepository extends AbstractCarRepository {
       );
 
       if (affectedRows === 0) {
-        throw new CarNotFoundError(`Car with id ${car.id} doesn't exist`);
+        throw new CarNotFoundError(`Car with id ${car.id} doesn't exist.`);
       }
 
       carId = car.id;
@@ -70,7 +70,7 @@ class CarRepository extends AbstractCarRepository {
     const deletedRows = await this.CarModel.destroy({ where: { id } });
 
     if (deletedRows === 0) {
-      throw new CarNotFoundError(`Car with id ${id} doesn't exist`);
+      throw new CarNotFoundError(`Car with id ${id} doesn't exist.`);
     }
 
     return true;

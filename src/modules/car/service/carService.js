@@ -15,7 +15,7 @@ class CarService {
    */
   async save(car) {
     if (!car) {
-      throw new CarNotDefinedError('You need a defined Car to be able to save to the database');
+      throw new CarNotDefinedError('A defined Car is needed to be able to save to the database.');
     }
 
     const savedCar = await this.carRepository.save(car);
@@ -28,7 +28,7 @@ class CarService {
    */
   async delete(id) {
     if (!id) {
-      throw new CarIdNotDefinedError('An id is required to delete a Car');
+      throw new CarIdNotDefinedError('An id is required to delete a Car from the database.');
     }
 
     const isDeleted = await this.carRepository.delete(id);
@@ -41,7 +41,7 @@ class CarService {
    */
   async getById(id) {
     if (!id) {
-      throw new CarIdNotDefinedError('An id is required to fetch a record from the database');
+      throw new CarIdNotDefinedError('An id is required to fetch a Car from the database.');
     }
 
     const car = await this.carRepository.getById(id);
