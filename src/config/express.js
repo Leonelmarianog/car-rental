@@ -24,6 +24,15 @@ function setStaticFolder(app) {
 
 /**
  * @param {import('express').Application} app
+ * @param {import('rsdi').default} container
+ */
+function setSession(app, container) {
+  const session = container.get('Session');
+  app.use(session);
+}
+
+/**
+ * @param {import('express').Application} app
  */
 function setBaseRoute(app) {
   app.get('/', (req, res) => {
@@ -46,6 +55,7 @@ module.exports = {
   createExpressApp,
   setBodyParser,
   setStaticFolder,
+  setSession,
   setBaseRoute,
   initExpressApp,
 };

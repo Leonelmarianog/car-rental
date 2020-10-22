@@ -6,6 +6,7 @@ const {
   createExpressApp,
   setBodyParser,
   setStaticFolder,
+  setSession,
   setBaseRoute,
   initExpressApp,
 } = require('./config/express');
@@ -18,6 +19,7 @@ const container = configureDI();
 setViewEngine(app, container);
 setBodyParser(app);
 setStaticFolder(app);
+setSession(app, container);
 setBaseRoute(app);
 initCarModule(app, container);
 initExpressApp(app, PORT);

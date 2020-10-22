@@ -1,6 +1,7 @@
 const { default: DIContainer, object, get, factory } = require('rsdi');
 const { Sequelize } = require('sequelize');
 const nunjucks = require('nunjucks');
+const session = require('express-session');
 const { CarController, CarService, CarRepository, CarModel } = require('../modules/car/module');
 
 /**
@@ -24,6 +25,20 @@ function configureCarModel(container) {
 }
 
 /**
+ * @returns {Session} - Middleware
+ */
+function configureSession() {
+  const ONE_WEEK_IN_SECONDS = 604800000;
+  const sessionOptions = {
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: ONE_WEEK_IN_SECONDS },
+  };
+  return session(sessionOptions);
+}
+
+/**
  * @returns {Object} - Nunjucks flags
  */
 function configureNunjucksFlags() {
@@ -44,6 +59,7 @@ function configureNunjucksFileSystemLoader() {
 function addCommonDefinitions(container) {
   container.addDefinitions({
     Sequelize: factory(configureMainSequelizeDatabase),
+    Session: factory(configureSession),
   });
 }
 

@@ -82,6 +82,11 @@ class CarRepository extends AbstractCarRepository {
    */
   async getById(id) {
     const carData = await this.CarModel.findByPk(id);
+
+    if (!carData) {
+      throw new CarNotFoundError(`Car with id ${id} doesn't exist.`);
+    }
+
     const car = fromModelToEntity(carData);
     return car;
   }

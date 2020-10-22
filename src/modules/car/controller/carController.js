@@ -30,7 +30,10 @@ class CarController extends AbstractController {
    */
   async index(req, res) {
     const cars = await this.carService.getAll();
-    res.render('car/views/index.html', { cars });
+    const { message, error } = req.session;
+    res.render('car/views/index.html', { cars, message, error });
+    req.session.message = null;
+    req.session.error = null;
   }
 
   /**
@@ -46,9 +49,21 @@ class CarController extends AbstractController {
    * @param {import('express').Response} res
    */
   async save(req, res) {
-    const carData = { ...req.body };
-    const car = fromDataToEntity(carData);
-    await this.carService.save(car);
+    try {
+      const carData = { ...req.body };
+      const isUpdate = carData.id;
+      const car = fromDataToEntity(carData);
+      const savedCar = await this.carService.save(car);
+
+      if (isUpdate) {
+        req.session.message = `Car with id ${savedCar.id} sucessfully updated.`;
+      } else {
+        req.session.message = `Car with id ${savedCar.id} sucessfully created.`;
+      }
+    } catch (error) {
+      req.session.error = error.message;
+    }
+
     res.redirect(this.BASE_ROUTE);
   }
 
@@ -57,9 +72,14 @@ class CarController extends AbstractController {
    * @param {import('express').Response} res
    */
   async update(req, res) {
-    const { carId } = req.params;
-    const car = await this.carService.getById(carId);
-    res.render('car/views/form.html', { car });
+    try {
+      const { carId } = req.params;
+      const car = await this.carService.getById(carId);
+      res.render('car/views/form.html', { car });
+    } catch (error) {
+      req.session.error = error.message;
+      res.redirect(this.BASE_ROUTE);
+    }
   }
 
   /**
@@ -67,8 +87,14 @@ class CarController extends AbstractController {
    * @param {import('express').Response} res
    */
   async delete(req, res) {
-    const { carId } = req.params;
-    await this.carService.delete(carId);
+    try {
+      const { carId } = req.params;
+      await this.carService.delete(carId);
+      req.session.message = `Car with Id ${carId} sucessfully deleted.`;
+    } catch (error) {
+      req.session.error = error.message;
+    }
+
     res.redirect(this.BASE_ROUTE);
   }
 }
