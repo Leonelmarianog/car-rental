@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "schema:sync": "node src/cli/init.db.js",
-    "dev": "nodemon -e js,html src/app.js"
+    "dev": "nodemon -e js,html src/app.js",
+    "test": "jest --coverage",
+    "test:dev": "jest --watch"
   },
   "author": "",
   "license": "ISC",
