@@ -12,6 +12,7 @@ const {
 } = require('./config/express');
 const { init: initCarModule } = require('./modules/car/module');
 const { init: initClientModule } = require('./modules/client/module');
+const { init: initRentModule } = require('./modules/rent/module');
 
 const app = createExpressApp();
 const PORT = process.env.PORT || 3000;
@@ -24,4 +25,5 @@ setSession(app, container);
 setBaseRoute(app);
 initCarModule(app, container);
 initClientModule(app, container);
+initRentModule(app, container);
 initExpressApp(app, PORT);

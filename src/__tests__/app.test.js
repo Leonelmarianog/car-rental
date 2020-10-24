@@ -16,6 +16,7 @@ const {
 } = require('../config/express');
 const { init: initCarModule } = require('../modules/car/module');
 const { init: initClientModule } = require('../modules/client/module');
+const { init: initRentModule } = require('../modules/rent/module');
 
 require('../app');
 
@@ -29,5 +30,6 @@ test('Application initializes', () => {
   expect(setBaseRoute).toHaveBeenCalledTimes(1);
   expect(initCarModule).toHaveBeenCalledTimes(1);
   expect(initClientModule).toHaveBeenCalledTimes(1);
+  expect(initRentModule).toHaveBeenCalledTimes(1);
   expect(initExpressApp).toHaveBeenCalledTimes(1);
 });

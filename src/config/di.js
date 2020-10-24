@@ -9,6 +9,12 @@ const {
   ClientRepository,
   ClientModel,
 } = require('../modules/client/module');
+const {
+  RentController,
+  RentService,
+  RentRepository,
+  RentModel,
+} = require('../modules/rent/module');
 
 /**
  * https://sequelize.org/master/manual/getting-started.html
@@ -30,10 +36,22 @@ function configureCarModel(container) {
   return CarModel;
 }
 
+/**
+ * @param {DIContainer} container
+ */
 function configureClientModel(container) {
   const sequelize = container.get('Sequelize');
   ClientModel.setup(sequelize);
   return ClientModel;
+}
+
+/**
+ * @param {DIContainer} container
+ */
+function configureRentModel(container) {
+  RentModel.setup(container.get('Sequelize'));
+  RentModel.setAssociations(container.get('CarModel'), container.get('ClientModel'));
+  return RentModel;
 }
 
 /**
@@ -111,6 +129,26 @@ function addClientModuleDefinitions(container) {
 }
 
 /**
+ * @param {DIContainer} container
+ */
+function addRentModuleDefinitions(container) {
+  container.addDefinitions({
+    RentController: object(RentController).construct(
+      get('RentService'),
+      get('CarService'),
+      get('ClientService')
+    ),
+    RentService: object(RentService).construct(get('RentRepository')),
+    RentRepository: object(RentRepository).construct(
+      get('RentModel'),
+      get('CarModel'),
+      get('ClientModel')
+    ),
+    RentModel: factory(configureRentModel),
+  });
+}
+
+/**
  * https://github.com/radzserg/rsdi
  * @returns {DIContainer}
  */
@@ -120,6 +158,7 @@ function configureDI() {
   addNunjucksDefinitions(container);
   addCarModuleDefinitions(container);
   addClientModuleDefinitions(container);
+  addRentModuleDefinitions(container);
   return container;
 }
 

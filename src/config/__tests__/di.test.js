@@ -29,4 +29,11 @@ describe('configureDI', () => {
     expect(container.get('ClientRepository')).toBeDefined();
     expect(container.get('ClientModel')).toBeDefined();
   });
+
+  it('Adds Rent module definitions to the container', () => {
+    expect(container.get('RentController')).toBeDefined();
+    expect(container.get('RentService')).toBeDefined();
+    expect(container.get('RentRepository')).toBeDefined();
+    expect(container.get('RentModel')).toBeDefined();
+  });
 });
