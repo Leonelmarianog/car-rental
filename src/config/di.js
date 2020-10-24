@@ -3,6 +3,12 @@ const { Sequelize } = require('sequelize');
 const nunjucks = require('nunjucks');
 const session = require('express-session');
 const { CarController, CarService, CarRepository, CarModel } = require('../modules/car/module');
+const {
+  ClientController,
+  ClientService,
+  ClientRepository,
+  ClientModel,
+} = require('../modules/client/module');
 
 /**
  * https://sequelize.org/master/manual/getting-started.html
@@ -22,6 +28,12 @@ function configureCarModel(container) {
   const sequelize = container.get('Sequelize');
   CarModel.setup(sequelize);
   return CarModel;
+}
+
+function configureClientModel(container) {
+  const sequelize = container.get('Sequelize');
+  ClientModel.setup(sequelize);
+  return ClientModel;
 }
 
 /**
@@ -87,6 +99,18 @@ function addCarModuleDefinitions(container) {
 }
 
 /**
+ * @param {DIContainer} container
+ */
+function addClientModuleDefinitions(container) {
+  container.addDefinitions({
+    ClientController: object(ClientController).construct(get('ClientService')),
+    ClientService: object(ClientService).construct(get('ClientRepository')),
+    ClientRepository: object(ClientRepository).construct(get('ClientModel')),
+    ClientModel: factory(configureClientModel),
+  });
+}
+
+/**
  * https://github.com/radzserg/rsdi
  * @returns {DIContainer}
  */
@@ -95,6 +119,7 @@ function configureDI() {
   addCommonDefinitions(container);
   addNunjucksDefinitions(container);
   addCarModuleDefinitions(container);
+  addClientModuleDefinitions(container);
   return container;
 }
 

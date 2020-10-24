@@ -22,4 +22,11 @@ describe('configureDI', () => {
     expect(container.get('CarRepository')).toBeDefined();
     expect(container.get('CarModel')).toBeDefined();
   });
+
+  it('Adds Client module definitions to the container', () => {
+    expect(container.get('ClientController')).toBeDefined();
+    expect(container.get('ClientService')).toBeDefined();
+    expect(container.get('ClientRepository')).toBeDefined();
+    expect(container.get('ClientModel')).toBeDefined();
+  });
 });

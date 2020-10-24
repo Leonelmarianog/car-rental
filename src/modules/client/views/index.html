@@ -1,0 +1,64 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+  <div class="my-5">
+    {% if message %}
+      <div class="notification is-success mb-5 mx-5">{{ message }}</div>
+    {% endif %}
+
+    {% if error %}
+      <div class="notification is-danger mb-5 mx-5">{{ error }}</div>
+    {% endif %}
+
+    <div class="has-text-centered mb-5">
+      <a class="button is-primary" href="/client/create">Add New Record</a>
+    </div>
+    
+    <table class="table has-text-centered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Document Type</th>
+          <th>Document Number</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+          <th>Birthdate</th>
+          <th>Created At</th>
+          <th>Last Updated</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in clients %}
+        <tr>
+          <td>{{ client.id }}</td>
+          <td>{{ client.firstName }}</td>
+          <td>{{ client.lastName }}</td>
+          <td>{{ client.documentType }}</td>
+          <td>{{ client.documentNumber }}</td>
+          <td>{{ client.address }}</td>
+          <td>{{ client.phoneNumber }}</td>
+          <td>{{ client.email}}</td>
+          <td>{{ client.birthDate }}</td>
+          <td>{{ client.createdAt }}</td>
+          <td>{{ client.lastUpdated }}</td>
+          <td>
+            <a href="/client/update/{{ client.id }}" class="button is-warning">
+              <i class="fas fa-edit"></i>
+            </a>
+          </td>
+          <td>
+            <a href="/client/delete/{{ client.id }}" class="button is-danger">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
