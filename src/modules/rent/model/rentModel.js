@@ -13,7 +13,7 @@ class RentModel extends Model {
           autoIncrement: true,
           allowNull: false,
         },
-        unitPrice: {
+        pricePerDay: {
           field: 'unit_price',
           type: DataTypes.REAL,
           allowNull: false,

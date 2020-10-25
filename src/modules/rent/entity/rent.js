@@ -5,7 +5,7 @@ class Rent {
     fkClientId,
     Car,
     Client,
-    unitPrice,
+    pricePerDay,
     startDate,
     finishDate,
     totalPrice,
@@ -19,7 +19,7 @@ class Rent {
     this.fkClientId = fkClientId;
     this.Car = Car;
     this.Client = Client;
-    this.unitPrice = unitPrice;
+    this.pricePerDay = pricePerDay;
     this.startDate = startDate;
     this.finishDate = finishDate;
     this.totalPrice = totalPrice;
