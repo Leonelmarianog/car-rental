@@ -34,6 +34,7 @@ class CarModel extends Model {
           allowNull: false,
         },
         airConditioner: {
+          field: 'air_conditioner',
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
@@ -46,6 +47,7 @@ class CarModel extends Model {
           allowNull: false,
         },
         pricePerDay: {
+          field: 'price_per_day',
           type: DataTypes.REAL,
           allowNull: false,
         },

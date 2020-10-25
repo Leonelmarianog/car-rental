@@ -14,7 +14,7 @@ class RentModel extends Model {
           allowNull: false,
         },
         pricePerDay: {
-          field: 'unit_price',
+          field: 'price_per_day',
           type: DataTypes.REAL,
           allowNull: false,
         },

@@ -14,18 +14,22 @@ class ClientModel extends Model {
           allowNull: false,
         },
         firstName: {
+          field: 'first_name',
           type: DataTypes.TEXT,
           allowNull: false,
         },
         lastName: {
+          field: 'last_name',
           type: DataTypes.TEXT,
           allowNull: false,
         },
         documentType: {
+          field: 'document_type',
           type: DataTypes.TEXT,
           allowNull: false,
         },
         documentNumber: {
+          field: 'document_number',
           type: DataTypes.TEXT,
           allowNull: false,
         },
@@ -34,6 +38,7 @@ class ClientModel extends Model {
           allowNull: false,
         },
         phoneNumber: {
+          field: 'phone_number',
           type: DataTypes.TEXT,
           allowNull: false,
         },
@@ -42,6 +47,7 @@ class ClientModel extends Model {
           allowNull: false,
         },
         birthDate: {
+          field: 'birthdate',
           type: DataTypes.TEXT,
           allowNull: false,
         },
