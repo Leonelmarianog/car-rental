@@ -9,6 +9,7 @@ class Car {
     airConditioner,
     passengers,
     transmission,
+    pricePerDay,
     createdAt,
     lastUpdated,
   }) {
@@ -21,6 +22,7 @@ class Car {
     this.airConditioner = airConditioner;
     this.passengers = passengers;
     this.transmission = transmission;
+    this.pricePerDay = pricePerDay;
     this.createdAt = createdAt;
     this.lastUpdated = lastUpdated;
   }

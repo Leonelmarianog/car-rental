@@ -45,6 +45,10 @@ class CarModel extends Model {
           type: DataTypes.TEXT,
           allowNull: false,
         },
+        pricePerDay: {
+          type: DataTypes.REAL,
+          allowNull: false,
+        },
       },
       {
         sequelize: sequelizeInstance,

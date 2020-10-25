@@ -27,6 +27,7 @@ async function init() {
       airConditioner: true,
       passengers: 4,
       transmission: 'manual',
+      pricePerDay: 200,
     },
     {
       brand: 'Chevrolet',
@@ -37,6 +38,7 @@ async function init() {
       airConditioner: true,
       passengers: 4,
       transmission: 'manual',
+      pricePerDay: 350,
     },
   ]);
 
@@ -67,7 +69,7 @@ async function init() {
     {
       fkCarId: cars[0].id,
       fkClientId: clients[0].id,
-      unitPrice: 200,
+      pricePerDay: cars[0].pricePerDay,
       startDate: '2020-05-07',
       finishDate: '2020-06-07',
       totalPrice: 6200,
@@ -77,7 +79,7 @@ async function init() {
     {
       fkCarId: cars[1].id,
       fkClientId: clients[1].id,
-      unitPrice: 350,
+      pricePerDay: cars[1].pricePerDay,
       startDate: '2020-05-12',
       finishDate: '2020-05-19',
       totalPrice: 2450,

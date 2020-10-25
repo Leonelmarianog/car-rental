@@ -22,6 +22,7 @@ function fromDataToEntity({
   'air-conditioner': airConditioner,
   passengers,
   transmission,
+  'price-per-day': pricePerDay,
 }) {
   return new Car({
     id: Number(id),
@@ -33,6 +34,7 @@ function fromDataToEntity({
     airConditioner: Boolean(airConditioner),
     passengers: Number(passengers),
     transmission,
+    pricePerDay: Number(pricePerDay),
   });
 }
 
