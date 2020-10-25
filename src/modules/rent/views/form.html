@@ -28,7 +28,7 @@
             <div class="control">
               <div class="select">
                 <select name="fk-client-id" required>
-                  <option value="">Select a car</option>
+                  <option value="">Select a client</option>
                   {% for client in clients %}
                     <option value="{{ client.id }}" {{ "selected" if rent.fkClientId === client.id }}>{{ client.firstName }} {{ client.lastName }}</option>
                   {% endfor %}
