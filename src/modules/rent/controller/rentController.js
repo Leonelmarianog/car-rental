@@ -22,6 +22,7 @@ class RentController extends AbstractController {
    */
   configureRoutes(app) {
     app.get(`${this.BASE_ROUTE}`, this.index.bind(this));
+    app.get(`${this.BASE_ROUTE}/view/:rentId`, this.view.bind(this));
     app.get(`${this.BASE_ROUTE}/create`, this.create.bind(this));
     app.post(`${this.BASE_ROUTE}/save`, this.save.bind(this));
     app.get(`${this.BASE_ROUTE}/update/:rentId`, this.update.bind(this));
@@ -38,6 +39,12 @@ class RentController extends AbstractController {
     res.render('rent/views/index.html', { rents, message, error });
     req.session.message = null;
     req.session.error = null;
+  }
+
+  async view(req, res) {
+    const { rentId } = req.params;
+    const rent = await this.rentService.getById(rentId);
+    res.render('rent/views/details.html', { rent });
   }
 
   /**

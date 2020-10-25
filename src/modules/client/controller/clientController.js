@@ -18,6 +18,7 @@ class ClientController extends AbstractController {
    */
   configureRoutes(app) {
     app.get(`${this.BASE_ROUTE}`, this.index.bind(this));
+    app.get(`${this.BASE_ROUTE}/view/:clientId`, this.view.bind(this));
     app.get(`${this.BASE_ROUTE}/create`, this.create.bind(this));
     app.post(`${this.BASE_ROUTE}/save`, this.save.bind(this));
     app.get(`${this.BASE_ROUTE}/update/:clientId`, this.update.bind(this));
@@ -34,6 +35,12 @@ class ClientController extends AbstractController {
     res.render('client/views/index.html', { clients, message, error });
     req.session.message = null;
     req.session.error = null;
+  }
+
+  async view(req, res) {
+    const { clientId } = req.params;
+    const client = await this.clientService.getById(clientId);
+    res.render('client/views/details.html', { client });
   }
 
   /**

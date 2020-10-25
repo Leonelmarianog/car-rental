@@ -1,0 +1,70 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+  <main class="my-5">
+    <div class="container">
+      <div class="block is-display-flex is-justify-content-center">
+        <table class="table is-bordered is-striped is-fullwidth has-text-centered">
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <td>{{ car.id }}</td>
+            </tr>
+            <tr>
+              <th>Brand</th>
+              <td>{{ car.brand }}</td>
+            </tr>
+            <tr>
+              <th>Model</th>
+              <td>{{ car.model }}</td>
+            </tr>
+            <tr>
+              <th>Year</th>
+              <td>{{ car.year }}</td>
+            </tr>
+            <tr>
+              <th>KmH</th>
+              <td>{{ car.kmh }}</td>
+            </tr>
+            <tr>
+              <th>color</th>
+              <td>{{ car.color }}</td>
+            </tr>
+            <tr>
+              <th>A/C</th>
+              <td>{{ car.airConditioner }}</td>
+            </tr>
+            <tr>
+              <th>Passengers</th>
+              <td>{{ car.passengers }}</td>
+            </tr>
+            <tr>
+              <th>Transmission</th>
+              <td>{{ car.transmission }}</td>
+            </tr>
+            <tr>
+              <th>Created At</th>
+              <td>{{ car.createdAt }}</td>
+            </tr>
+            <tr>
+              <th>Last Updated</th>
+              <td>{{ car.lastUpdated }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <div class="buttons is-centered">
+          <a href="/car/update/{{ car.id }}" class="button is-warning">
+            <i class="fas fa-edit mr-2"></i>
+            Edit
+          </a>
+          <a href="/car/delete/{{ car.id }}" class="button is-danger">
+            <i class="fas fa-trash-alt mr-2"></i>
+            Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

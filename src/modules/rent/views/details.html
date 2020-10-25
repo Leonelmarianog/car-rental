@@ -1,0 +1,70 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+  <main class="my-5">
+    <div class="container">
+      <div class="block is-display-flex is-justify-content-center">
+        <table class="table is-bordered is-striped is-fullwidth has-text-centered">
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <td>{{ rent.id }}</td>
+            </tr>
+            <tr>
+              <th>Car</th>
+              <td>{{ rent.Car.brand }} {{ rent.Car.model }}</td>
+            </tr>
+            <tr>
+              <th>Client</th>
+              <td>{{ rent.Client.firstName }} {{ rent.Client.lastName }}</td>
+            </tr>
+            <tr>
+              <th>Unit Price</th>
+              <td>{{ rent.unitPrice }}</td>
+            </tr>
+            <tr>
+              <th>Start Date</th>
+              <td>{{ rent.startDate }}</td>
+            </tr>
+            <tr>
+              <th>Finish Date</th>
+              <td>{{ rent.finishDate }}</td>
+            </tr>
+            <tr>
+              <th>Total Price</th>
+              <td>{{ rent.totalPrice }}</td>
+            </tr>
+            <tr>
+              <th>Payment Method</th>
+              <td>{{ rent.paymentMethod }}</td>
+            </tr>
+            <tr>
+              <th>Paid</th>
+              <td>{{ rent.paid }}</td>
+            </tr>
+            <tr>
+              <th>Created At</th>
+              <td>{{ rent.createdAt }}</td>
+            </tr>
+            <tr>
+              <th>Last Updated</th>
+              <td>{{ rent.lastUpdated }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <div class="buttons is-centered">
+          <a href="/rent/update/{{ rent.id }}" class="button is-warning">
+            <i class="fas fa-edit mr-2"></i>
+            Edit
+          </a>
+          <a href="/rent/delete/{{ rent.id }}" class="button is-danger">
+            <i class="fas fa-trash-alt mr-2"></i>
+            Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

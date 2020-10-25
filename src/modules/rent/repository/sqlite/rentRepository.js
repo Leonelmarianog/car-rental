@@ -85,7 +85,18 @@ class RentRepository extends AbstractRentRepository {
    * @returns {Promise<import('../../entity/rent')>}
    */
   async getById(id) {
-    const rentData = await this.RentModel.findByPk(id);
+    const rentData = await this.RentModel.findByPk(id, {
+      include: [
+        {
+          model: this.CarModel,
+          as: 'Car',
+        },
+        {
+          model: this.ClientModel,
+          as: 'Client',
+        },
+      ],
+    });
 
     if (!rentData) {
       throw new RentNotFoundError(`Rent with id ${id} doesn't exist.`);

@@ -1,14 +1,14 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-  <form action="/rent/save" method="POST">
-    <div class="p-5">
-      <div class="columns is-1 is-centered">
-        <div class="column is-half">
+  <main class="my-5">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <form action="/rent/save" method="POST">
           {% if rent.id %}
             <input type="hidden" value="{{ rent.id }}" name="id" readonly/>
           {% endif %}
-
+    
           <div class="field">
             <label class="label">Car</label>
             <div class="control">
@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-
+    
           <div class="field">
             <label class="label">Client</label>
             <div class="control">
@@ -36,35 +36,35 @@
               </div>
             </div>
           </div>
-
+    
           <div class="field">
             <label class="label" for="unit-price">Unit Price</label>
             <div class="control">
               <input class="input" id="unit-price" name="unit-price" type="text" value="{{ rent.unitPrice }}" placeholder="{{ rent.unitPrice }}" required/>
             </div>
           </div>
-          
+        
           <div class="field">
             <label class="label" for="start-date">Start Date</label>
             <div class="control">
               <input class="input" id="start-date" name="start-date" type="date" value="{{ rent.startDate }}" placeholder="{{ rent.startDate }}" required/>
             </div>
           </div>
-
+    
           <div class="field">
             <label class="label" for="finish-date">Finish Date</label>
             <div class="control">
               <input class="input" id="finish-date" name="finish-date" type="date" value="{{ rent.finishDate }}" placeholder="{{ rent.finishDate }}" required/>
             </div>
           </div>
-
+    
           <div class="field">
             <label class="label" for="total-price">Total Price</label>
             <div class="control">
               <input class="input" id="total-price" name="total-price" type="text" value="{{ rent.totalPrice }}" placeholder="{{ rent.totalPrice }}" required/>
             </div>
           </div>
-
+    
           <div class="field">
             <label class="label">Payment Method</label>
             <div class="control">
@@ -77,7 +77,7 @@
               </div>
             </div>
           </div>
-      
+    
           <div class="field">
             <label class="label">Paid</label>
             <div class="control">
@@ -91,8 +91,8 @@
               </label>
             </div>
           </div>
-
-          <div class="field mt-5">
+    
+          <div class="field">
             <div class="control has-text-centered">
               {% if rent.id %}
                 <button class="button is-primary">Update Record</button>
@@ -101,8 +101,8 @@
               {% endif %}
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
-  </form>
+  </main>
 {% endblock %}

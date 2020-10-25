@@ -1,64 +1,53 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-  <div class="container my-5">
-    {% if message %}
-      <div class="notification is-success mb-5 mx-5">{{ message }}</div>
-    {% endif %}
-
-    {% if error %}
-      <div class="notification is-danger mb-5 mx-5">{{ error }}</div>
-    {% endif %}
-
-    <div class="has-text-centered mb-5">
-      <a class="button is-primary" href="/car/create">Add New Record</a>
+  <main class="my-5">
+    <div class="container">
+      {% if message %}
+        <div class="block">
+          <div class="notification is-success">{{ message }}</div>
+        </div>
+      {% endif %}
+  
+      {% if error %}
+        <div class="block">
+          <div class="notification is-danger">{{ error }}</div>
+        </div>
+      {% endif %}
+  
+      <div class="block has-text-centered">
+        <a class="button is-primary" href="/car/create">Add New Record</a>
+      </div>
+  
+      <div class="block">
+        <table class="table is-bordered is-striped is-fullwidth has-text-centered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Brand</th>
+              <th>Model</th>
+              <th>Year</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for car in cars %}
+            <tr>
+              <td>{{ car.id }}</td>
+              <td>{{ car.brand }}</td>
+              <td>{{ car.model }}</td>
+              <td>{{ car.year }}</td>
+              <td>
+                <a href="/car/view/{{ car.id }}" class="button is-info">
+                  <i class="far fa-eye mr-2"></i>
+                  Details
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-    
-    <table class="table has-text-centered">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Year</th>
-          <th>KmH</th>
-          <th>Color</th>
-          <th>A/C</th>
-          <th>Passengers</th>
-          <th>Transmission</th>
-          <th>Created At</th>
-          <th>Last Updated</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for car in cars %}
-        <tr>
-          <td>{{ car.id }}</td>
-          <td>{{ car.brand }}</td>
-          <td>{{ car.model }}</td>
-          <td>{{ car.year }}</td>
-          <td>{{ car.kmh }}</td>
-          <td>{{ car.color }}</td>
-          <td>{{ "yes" if car.airConditioner else "no" }}</td>
-          <td>{{ car.passengers }}</td>
-          <td>{{ car.transmission }}</td>
-          <td>{{ car.createdAt }}</td>
-          <td>{{ car.lastUpdated }}</td>
-          <td>
-            <a href="/car/update/{{ car.id }}" class="button is-warning">
-              <i class="fas fa-edit"></i>
-            </a>
-          </td>
-          <td>
-            <a href="/car/delete/{{ car.id }}" class="button is-danger">
-              <i class="fas fa-trash-alt"></i>
-            </a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+  </main>
 {% endblock %}

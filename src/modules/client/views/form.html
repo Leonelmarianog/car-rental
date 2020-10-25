@@ -1,10 +1,10 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-  <form action="/client/save" method="POST">
-    <div class="p-5">
-      <div class="columns is-1 is-centered">
-        <div class="column is-half">
+  <main class="my-5">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <form action="/client/save" method="POST">
           {% if client.id %}
             <input type="hidden" value="{{ client.id }}" name="id" readonly/>
           {% endif %}
@@ -36,7 +36,7 @@
               </div>
             </div>
           </div>
-
+      
           <div class="field">
             <label class="label" for="document-number">Document Number</label>
             <div class="control">
@@ -50,21 +50,21 @@
               <input class="input" id="address" name="address" type="text" value="{{ client.address }}" placeholder="{{ client.address }}" required/>
             </div>
           </div>
-
+      
           <div class="field">
             <label class="label" for="phone-number">Phone Number</label>
             <div class="control">
               <input class="input" id="phone-number" name="phone-number" type="text" value="{{ client.phoneNumber }}" placeholder="{{ client.phoneNumber }}" required/>
             </div>
           </div>
-
+      
           <div class="field">
             <label class="label" for="email">Email</label>
             <div class="control">
               <input class="input" id="email" name="email" type="text" value="{{ client.email }}" placeholder="{{ client.email }}" required/>
             </div>
           </div>
-
+      
           <div class="field">
             <label class="label" for="birthdate">Date of Birth</label>
             <div class="control">
@@ -72,7 +72,7 @@
             </div>
           </div>
       
-          <div class="field mt-5">
+          <div class="field">
             <div class="control has-text-centered">
               {% if client.id %}
                 <button class="button is-primary">Update Record</button>
@@ -81,8 +81,8 @@
               {% endif %}
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
-  </form>
+  </main>
 {% endblock %}

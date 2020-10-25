@@ -1,64 +1,55 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-  <div class="my-5">
-    {% if message %}
-      <div class="notification is-success mb-5 mx-5">{{ message }}</div>
-    {% endif %}
-
-    {% if error %}
-      <div class="notification is-danger mb-5 mx-5">{{ error }}</div>
-    {% endif %}
-
-    <div class="has-text-centered mb-5">
-      <a class="button is-primary" href="/rent/create">Add New Record</a>
+  <main class="my-5">
+    <div class="container">
+      {% if message %}
+        <div class="block">
+          <div class="notification is-success">{{ message }}</div>
+        </div>
+      {% endif %}
+  
+      {% if error %}
+        <div class="block">
+          <div class="notification is-danger">{{ error }}</div>
+        </div>
+      {% endif %}
+  
+      <div class="block has-text-centered">
+        <a class="button is-primary" href="/rent/create">Add New Record</a>
+      </div>
+  
+      <div class="block">
+        <table class="table is-bordered is-striped is-fullwidth has-text-centered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Car</th>
+              <th>Client</th>
+              <th>Total Price</th>
+              <th>Paid</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rent in rents %}
+            <tr>
+              <td>{{ rent.id }}</td>
+              <td>{{ rent.Car.brand }} {{ rent.Car.model }}</td>
+              <td>{{ rent.Client.firstName }} {{ rent.Client.lastName }}</td>
+              <td>{{ rent.totalPrice }}</td>
+              <td>{{ rent.paid }}</td>
+              <td>
+                <a href="/rent/view/{{ rent.id }}" class="button is-info">
+                  <i class="far fa-eye mr-2"></i>
+                  Details
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-    
-    <table class="table has-text-centered">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Car</th>
-          <th>Client</th>
-          <th>Unit Price</th>
-          <th>Start Date</th>
-          <th>Finish Date</th>
-          <th>Total Price</th>
-          <th>Payment Method</th>
-          <th>Paid</th>
-          <th>Created At</th>
-          <th>Last Updated</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for rent in rents %}
-        <tr>
-          <td>{{ rent.id }}</td>
-          <td>{{ rent.Car.brand }} {{ rent.Car.model }}</td>
-          <td>{{ rent.Client.firstName }} {{ rent.Client.lastName }}</td>
-          <td>{{ rent.unitPrice }}</td>
-          <td>{{ rent.startDate }}</td>
-          <td>{{ rent.finishDate }}</td>
-          <td>{{ rent.totalPrice }}</td>
-          <td>{{ rent.paymentMethod }}</td>
-          <td>{{ rent.paid }}</td>
-          <td>{{ rent.createdAt }}</td>
-          <td>{{ rent.lastUpdated }}</td>
-          <td>
-            <a href="/rent/update/{{ rent.id }}" class="button is-warning">
-              <i class="fas fa-edit"></i>
-            </a>
-          </td>
-          <td>
-            <a href="/rent/delete/{{ rent.id }}" class="button is-danger">
-              <i class="fas fa-trash-alt"></i>
-            </a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+  </main>
 {% endblock %}
