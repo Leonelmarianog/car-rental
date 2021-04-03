@@ -1,11 +1,11 @@
 require('dotenv').config();
 
-const configureDI = require('../config/di');
+const configureDIC = require('../config/di');
 const { CarModel } = require('../modules/car/module');
 const { ClientModel } = require('../modules/client/module');
 const { RentModel } = require('../modules/rent/module');
 
-const container = configureDI();
+const container = configureDIC();
 const mainDb = container.get('Sequelize');
 const sessionDb = container.get('SessionSequelize');
 const sessionStore = container.get('SessionStore');

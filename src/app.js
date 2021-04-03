@@ -1,14 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const nunjucks = require('nunjucks');
-const configureDI = require('./config/di');
+const configureDIC = require('./config/di');
 const { init: initCarModule } = require('./modules/car/module');
 const { init: initClientModule } = require('./modules/client/module');
 const { init: initRentModule } = require('./modules/rent/module');
 
 function bootstrap() {
   const app = express();
-  const container = configureDI();
+  const container = configureDIC();
   const PORT = process.env.PORT || 3000;
 
   nunjucks.configure('src/modules', {

@@ -47,6 +47,7 @@ function configureCarModel(container) {
 
 /**
  * @param {DIContainer} container
+ * @return {ClientModel} ClientModel
  */
 function configureClientModel(container) {
   const sequelize = container.get('Sequelize');
@@ -56,6 +57,7 @@ function configureClientModel(container) {
 
 /**
  * @param {DIContainer} container
+ * @return {RentModel} RentModel
  */
 function configureRentModel(container) {
   RentModel.setup(container.get('Sequelize'));
@@ -65,7 +67,7 @@ function configureRentModel(container) {
 
 /**
  * @param {DIContainer} container
- * @returns {SequelizeStore}
+ * @returns {SequelizeStore} SequelizeStore
  */
 function configureSessionStore(container) {
   const sessionSequelize = container.get('SessionSequelize');
@@ -76,7 +78,7 @@ function configureSessionStore(container) {
 
 /**
  * @param {DIContainer} container
- * @returns {Session} - session middleware
+ * @returns {Session} Session Middleware
  */
 function configureSession(container) {
   const sessionStore = container.get('SessionStore');
@@ -147,10 +149,9 @@ function addRentModuleDefinitions(container) {
 }
 
 /**
- * https://github.com/radzserg/rsdi
  * @returns {DIContainer}
  */
-function configureDI() {
+function configureDIC() {
   const container = new DIContainer();
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);
@@ -159,4 +160,4 @@ function configureDI() {
   return container;
 }
 
-module.exports = configureDI;
+module.exports = configureDIC;
