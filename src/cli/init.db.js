@@ -6,16 +6,20 @@ const { ClientModel } = require('../modules/client/module');
 const { RentModel } = require('../modules/rent/module');
 
 const container = configureDI();
-const sequelize = container.get('Sequelize');
+const mainDb = container.get('Sequelize');
+const sessionDb = container.get('SessionSequelize');
+const sessionStore = container.get('SessionStore');
 
 async function init() {
-  await CarModel.setup(sequelize);
-  await ClientModel.setup(sequelize);
-  await RentModel.setup(sequelize);
+  await CarModel.setup(mainDb);
+  await ClientModel.setup(mainDb);
+  await RentModel.setup(mainDb);
 
   await RentModel.setAssociations(CarModel, ClientModel);
 
-  await sequelize.sync({ force: true });
+  await mainDb.sync({ force: true });
+  await sessionDb.sync({ force: true });
+  await sessionStore.sync({ force: true });
 
   const cars = await CarModel.bulkCreate([
     {

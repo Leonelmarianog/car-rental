@@ -1,6 +1,7 @@
 const { default: DIContainer, object, get, factory } = require('rsdi');
 const { Sequelize } = require('sequelize');
 const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const { CarController, CarService, CarRepository, CarModel } = require('../modules/car/module');
 const {
   ClientController,
@@ -16,13 +17,22 @@ const {
 } = require('../modules/rent/module');
 
 /**
- * https://sequelize.org/master/manual/getting-started.html
  * @returns {Sequelize} - Database connection
  */
-function configureMainSequelizeDatabase() {
+function configureMainDatabase() {
   return new Sequelize({
     dialect: 'sqlite',
-    storage: process.env.MAIN_DB_PATH,
+    storage: process.env.MAIN_DB,
+  });
+}
+
+/**
+ * @returns {Sequelize} - Database connection
+ */
+function configureSessionDatabase() {
+  return new Sequelize({
+    dialect: 'sqlite',
+    storage: process.env.SESSION_DB,
   });
 }
 
@@ -54,17 +64,30 @@ function configureRentModel(container) {
 }
 
 /**
- * @returns {Session} - Middleware
+ * @param {DIContainer} container
+ * @returns {SequelizeStore}
  */
-function configureSession() {
+function configureSessionStore(container) {
+  const sessionSequelize = container.get('SessionSequelize');
+  return new SequelizeStore({
+    db: sessionSequelize,
+  });
+}
+
+/**
+ * @param {DIContainer} container
+ * @returns {Session} - session middleware
+ */
+function configureSession(container) {
+  const sessionStore = container.get('SessionStore');
   const ONE_WEEK_IN_SECONDS = 604800000;
-  const sessionOptions = {
+  return session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: sessionStore,
     cookie: { maxAge: ONE_WEEK_IN_SECONDS },
-  };
-  return session(sessionOptions);
+  });
 }
 
 /**
@@ -72,7 +95,9 @@ function configureSession() {
  */
 function addCommonDefinitions(container) {
   container.addDefinitions({
-    Sequelize: factory(configureMainSequelizeDatabase),
+    Sequelize: factory(configureMainDatabase),
+    SessionSequelize: factory(configureSessionDatabase),
+    SessionStore: factory(configureSessionStore),
     Session: factory(configureSession),
   });
 }
