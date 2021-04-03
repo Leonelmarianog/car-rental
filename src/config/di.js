@@ -1,6 +1,5 @@
 const { default: DIContainer, object, get, factory } = require('rsdi');
 const { Sequelize } = require('sequelize');
-const nunjucks = require('nunjucks');
 const session = require('express-session');
 const { CarController, CarService, CarRepository, CarModel } = require('../modules/car/module');
 const {
@@ -69,38 +68,12 @@ function configureSession() {
 }
 
 /**
- * @returns {Object} - Nunjucks flags
- */
-function configureNunjucksFlags() {
-  return { autoescape: true };
-}
-
-/**
- * https://mozilla.github.io/nunjucks/api.html#filesystemloader
- * @returns {import('nunjucks').FileSystemLoader}
- */
-function configureNunjucksFileSystemLoader() {
-  return new nunjucks.FileSystemLoader('src/modules');
-}
-
-/**
  * @param {DIContainer} container
  */
 function addCommonDefinitions(container) {
   container.addDefinitions({
     Sequelize: factory(configureMainSequelizeDatabase),
     Session: factory(configureSession),
-  });
-}
-
-/**
- * @param {DIContainer} container
- */
-function addNunjucksDefinitions(container) {
-  container.addDefinitions({
-    Environment: object(nunjucks.Environment).construct(get('FileSystemLoader'), get('Flags')),
-    FileSystemLoader: factory(configureNunjucksFileSystemLoader),
-    Flags: factory(configureNunjucksFlags),
   });
 }
 
@@ -155,7 +128,6 @@ function addRentModuleDefinitions(container) {
 function configureDI() {
   const container = new DIContainer();
   addCommonDefinitions(container);
-  addNunjucksDefinitions(container);
   addCarModuleDefinitions(container);
   addClientModuleDefinitions(container);
   addRentModuleDefinitions(container);
