@@ -1,16 +1,21 @@
 {
-  "name": "car-rental",
+  "name": "rent-a-car",
   "version": "1.0.0",
-  "description": "",
+  "description": "Car Rent System",
   "main": "index.js",
   "scripts": {
     "schema:sync": "node src/cli/init.db.js",
-    "dev": "nodemon -e js,html src/app.js",
+    "start": "node src/app.js",
+    "dev": "cross-env NODE_ENV=development nodemon",
     "test": "jest --coverage",
-    "test:dev": "jest --watch"
+    "test:dev": "jest --watchAll",
+    "eslint:check": "eslint --ext .js .",
+    "eslint:fix": "eslint --fix --ext .js .",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Leonel Gauna",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^26.0.14",
     "eslint": "^7.11.0",
@@ -25,6 +30,7 @@
   "dependencies": {
     "bulma": "^0.9.1",
     "connect-session-sequelize": "^7.1.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
