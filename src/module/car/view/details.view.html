@@ -1,4 +1,4 @@
-{% extends "views/layout/base.html" %}
+{% extends "common/view/layout/base.html" %}
 
 {% block content %}
   <main class="my-5">
@@ -43,8 +43,8 @@
               <td>{{ car.transmission }}</td>
             </tr>
             <tr>
-              <th>Price per day</th>
-              <td>{{ car.pricePerDay }}</td>
+              <th>Price</th>
+              <td>{{ car.price }}</td>
             </tr>
             <tr>
               <th>Created At</th>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
               <th>Last Updated</th>
-              <td>{{ car.lastUpdated }}</td>
+              <td>{{ car.updatedAt }}</td>
             </tr>
           </tbody>
         </table>

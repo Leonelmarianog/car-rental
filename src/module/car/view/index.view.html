@@ -1,4 +1,4 @@
-{% extends "views/layout/base.html" %}
+{% extends "common/view/layout/base.html" %}
 
 {% block content %}
   <main class="my-5">
@@ -27,7 +27,7 @@
               <th>Brand</th>
               <th>Model</th>
               <th>Year</th>
-              <th>Price per day</th>
+              <th>Price</th>
               <th></th>
             </tr>
           </thead>
@@ -38,7 +38,7 @@
               <td>{{ car.brand }}</td>
               <td>{{ car.model }}</td>
               <td>{{ car.year }}</td>
-              <td>{{ car.pricePerDay }}</td>
+              <td>{{ car.price }}</td>
               <td>
                 <a href="/car/view/{{ car.id }}" class="button is-info">
                   <i class="far fa-eye mr-2"></i>

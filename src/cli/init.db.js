@@ -1,9 +1,8 @@
 require('dotenv').config();
-
-const configureDIC = require('../config/di');
-const { CarModel } = require('../modules/car/module');
-const { ClientModel } = require('../modules/client/module');
-const { RentModel } = require('../modules/rent/module');
+const { configureDIC } = require('../config/dic');
+const { CarModel } = require('../module/car/car.module');
+/* const { ClientModel } = require('../modules/client/module');
+const { RentModel } = require('../modules/rent/module'); */
 
 const container = configureDIC();
 const mainDb = container.get('Sequelize');
@@ -12,16 +11,16 @@ const sessionStore = container.get('SessionStore');
 
 async function init() {
   await CarModel.setup(mainDb);
-  await ClientModel.setup(mainDb);
+  /*   await ClientModel.setup(mainDb);
   await RentModel.setup(mainDb);
 
-  await RentModel.setAssociations(CarModel, ClientModel);
+  await RentModel.setAssociations(CarModel, ClientModel); */
 
   await mainDb.sync({ force: true });
   await sessionDb.sync({ force: true });
   await sessionStore.sync({ force: true });
 
-  const cars = await CarModel.bulkCreate([
+  await CarModel.bulkCreate([
     {
       brand: 'Renault',
       model: '30',
@@ -31,7 +30,7 @@ async function init() {
       airConditioner: true,
       passengers: 4,
       transmission: 'manual',
-      pricePerDay: 200,
+      price: 200,
     },
     {
       brand: 'Chevrolet',
@@ -42,11 +41,11 @@ async function init() {
       airConditioner: true,
       passengers: 4,
       transmission: 'manual',
-      pricePerDay: 350,
+      price: 350,
     },
   ]);
 
-  const clients = await ClientModel.bulkCreate([
+  /*   const clients = await ClientModel.bulkCreate([
     {
       firstName: 'Pepe',
       lastName: 'Lopez',
@@ -90,7 +89,7 @@ async function init() {
       paymentMethod: 'credit card',
       paid: true,
     },
-  ]);
+  ]); */
 }
 
 init();

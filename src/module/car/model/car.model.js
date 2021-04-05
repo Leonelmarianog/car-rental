@@ -14,11 +14,11 @@ class CarModel extends Model {
           allowNull: false,
         },
         brand: {
-          type: DataTypes.TEXT,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         model: {
-          type: DataTypes.TEXT,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         year: {
@@ -30,11 +30,10 @@ class CarModel extends Model {
           allowNull: false,
         },
         color: {
-          type: DataTypes.TEXT,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         airConditioner: {
-          field: 'air_conditioner',
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
@@ -43,12 +42,11 @@ class CarModel extends Model {
           allowNull: false,
         },
         transmission: {
-          type: DataTypes.TEXT,
+          type: DataTypes.STRING,
           allowNull: false,
         },
-        pricePerDay: {
-          field: 'price_per_day',
-          type: DataTypes.REAL,
+        price: {
+          type: DataTypes.FLOAT,
           allowNull: false,
         },
       },
@@ -56,10 +54,11 @@ class CarModel extends Model {
         sequelize: sequelizeInstance,
         modelName: 'Car',
         tableName: 'Cars',
-        updatedAt: 'lastUpdated',
+        underscored: true,
+        paranoid: true,
       }
     );
   }
 }
 
-module.exports = CarModel;
+module.exports = { CarModel };

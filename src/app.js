@@ -1,17 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const nunjucks = require('nunjucks');
-const configureDIC = require('./config/di');
-const { init: initCarModule } = require('./modules/car/module');
-const { init: initClientModule } = require('./modules/client/module');
-const { init: initRentModule } = require('./modules/rent/module');
+const { configureDIC } = require('./config/dic');
+const { bootstrap: bootstrapCarModule } = require('./module/car/car.module');
+/* const { init: initClientModule } = require('./modules/client/module');
+const { init: initRentModule } = require('./modules/rent/module'); */
 
 function bootstrap() {
   const app = express();
   const container = configureDIC();
   const PORT = process.env.PORT || 3000;
 
-  nunjucks.configure('src/modules', {
+  nunjucks.configure('src/module', {
     autoescape: true,
     express: app,
   });
@@ -21,9 +21,9 @@ function bootstrap() {
   app.use('/public', express.static('public'));
   app.use(container.get('Session'));
 
-  initCarModule(app, container);
-  initClientModule(app, container);
-  initRentModule(app, container);
+  bootstrapCarModule(app, container);
+  /*   initClientModule(app, container);
+  initRentModule(app, container); */
 
   // eslint-disable-next-line no-console
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

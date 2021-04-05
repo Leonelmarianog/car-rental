@@ -9,9 +9,10 @@ class Car {
     airConditioner,
     passengers,
     transmission,
-    pricePerDay,
+    price,
     createdAt,
-    lastUpdated,
+    updatedAt,
+    deletedAt,
   }) {
     this.id = id;
     this.brand = brand;
@@ -22,10 +23,11 @@ class Car {
     this.airConditioner = airConditioner;
     this.passengers = passengers;
     this.transmission = transmission;
-    this.pricePerDay = pricePerDay;
+    this.price = price;
     this.createdAt = createdAt;
-    this.lastUpdated = lastUpdated;
+    this.updatedAt = updatedAt;
+    this.deletedAt = deletedAt;
   }
 }
 
-module.exports = Car;
+module.exports = { Car };

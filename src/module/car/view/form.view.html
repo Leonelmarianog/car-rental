@@ -1,4 +1,4 @@
-{% extends "views/layout/base.html" %}
+{% extends "common/view/layout/base.html" %}
 
 {% block content %}
 <main class="my-5">
@@ -80,9 +80,9 @@
         </div>
 
         <div class="field">
-          <label class="label" for="price-per-day">Price per day</label>
+          <label class="label" for="price">Price</label>
           <div class="control">
-            <input class="input" id="price-per-day" name="price-per-day" type="number" value="{{ car.pricePerDay }}" placeholder="{{ car.pricePerDay }}" required/>
+            <input class="input" id="price" name="price" type="number" value="{{ car.price }}" placeholder="{{ car.price }}" required/>
           </div>
         </div>
     

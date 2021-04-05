@@ -1,15 +1,15 @@
-const Car = require('../entity/car');
+const { Car } = require('../entity/car.entity');
 
 /**
  * @param {Object} modelInstance
- * @returns {Car} - Car entity
+ * @returns {Car} Car entity
  */
 function fromModelToEntity(modelInstance) {
   return new Car(modelInstance.toJSON());
 }
 
 /**
- * @param {Object} - Form data
+ * @param {Object} formData
  * @returns {Car} - Car Entity
  */
 function fromDataToEntity({
@@ -22,7 +22,7 @@ function fromDataToEntity({
   'air-conditioner': airConditioner,
   passengers,
   transmission,
-  'price-per-day': pricePerDay,
+  price,
 }) {
   return new Car({
     id: Number(id),
@@ -34,7 +34,7 @@ function fromDataToEntity({
     airConditioner: Boolean(airConditioner),
     passengers: Number(passengers),
     transmission,
-    pricePerDay: Number(pricePerDay),
+    price: Number(price),
   });
 }
 
