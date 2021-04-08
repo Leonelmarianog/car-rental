@@ -1,4 +1,4 @@
-const { NotDefinedException } = require('../../common/exceptions');
+const { NotDefinedException } = require('../../common/exception');
 const { Car } = require('../entity/car.entity');
 
 class CarService {

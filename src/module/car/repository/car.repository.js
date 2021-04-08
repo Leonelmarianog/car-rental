@@ -1,5 +1,5 @@
 const { fromModelToEntity } = require('../mapper/car.mapper');
-const { NotFoundException, NotDefinedException } = require('../../common/exceptions');
+const { NotFoundException, NotDefinedException } = require('../../common/exception');
 const { Car } = require('../entity/car.entity');
 
 class CarRepository {

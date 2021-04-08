@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 const { fromDataToEntity } = require('../mapper/car.mapper');
-const { NotDefinedException, NotFoundException } = require('../../common/exceptions');
+const { NotDefinedException, NotFoundException } = require('../../common/exception');
 
 class CarController {
   /**
