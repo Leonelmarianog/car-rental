@@ -1,16 +1,16 @@
-const Client = require('../entity/client');
+const { User } = require('../entity/user.entity');
 
 /**
  * @param {Object} modelInstance
- * @returns {Client} - Client entity
+ * @returns {import('../entity/user.entity').User} - User entity
  */
 function fromModelToEntity(modelInstance) {
-  return new Client(modelInstance.toJSON());
+  return new User(modelInstance.toJSON());
 }
 
 /**
  * @param {Object} - Form data
- * @returns {Client} - Client Entity
+ * @returns {import('../entity/user.entity').User} - User entity
  */
 function fromDataToEntity({
   id,
@@ -23,7 +23,7 @@ function fromDataToEntity({
   email,
   birthdate: birthDate,
 }) {
-  return new Client({
+  return new User({
     id: Number(id),
     firstName,
     lastName,

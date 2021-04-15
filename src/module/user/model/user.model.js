@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 
-class ClientModel extends Model {
+class UserModel extends Model {
   /**
    * @param {import('sequelize').Sequelize} sequelizeInstance
    */
   static setup(sequelizeInstance) {
-    ClientModel.init(
+    UserModel.init(
       {
         id: {
           type: DataTypes.INTEGER,
@@ -14,22 +14,18 @@ class ClientModel extends Model {
           allowNull: false,
         },
         firstName: {
-          field: 'first_name',
           type: DataTypes.TEXT,
           allowNull: false,
         },
         lastName: {
-          field: 'last_name',
           type: DataTypes.TEXT,
           allowNull: false,
         },
         documentType: {
-          field: 'document_type',
           type: DataTypes.TEXT,
           allowNull: false,
         },
         documentNumber: {
-          field: 'document_number',
           type: DataTypes.TEXT,
           allowNull: false,
         },
@@ -38,7 +34,6 @@ class ClientModel extends Model {
           allowNull: false,
         },
         phoneNumber: {
-          field: 'phone_number',
           type: DataTypes.TEXT,
           allowNull: false,
         },
@@ -47,19 +42,19 @@ class ClientModel extends Model {
           allowNull: false,
         },
         birthDate: {
-          field: 'birthdate',
           type: DataTypes.TEXT,
           allowNull: false,
         },
       },
       {
         sequelize: sequelizeInstance,
-        modelName: 'Client',
-        tableName: 'Clients',
-        updatedAt: 'lastUpdated',
+        modelName: 'User',
+        tableName: 'Users',
+        underscored: true,
+        paranoid: true,
       }
     );
   }
 }
 
-module.exports = ClientModel;
+module.exports = { UserModel };

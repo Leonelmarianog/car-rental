@@ -1,4 +1,4 @@
-class Client {
+class User {
   constructor({
     id,
     firstName,
@@ -10,7 +10,7 @@ class Client {
     email,
     birthDate,
     createdAt,
-    lastUpdated,
+    updatedAt,
   }) {
     this.id = id;
     this.firstName = firstName;
@@ -22,8 +22,8 @@ class Client {
     this.email = email;
     this.birthDate = birthDate;
     this.createdAt = createdAt;
-    this.lastUpdated = lastUpdated;
+    this.updatedAt = updatedAt;
   }
 }
 
-module.exports = Client;
+module.exports = { User };
