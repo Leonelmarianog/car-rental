@@ -1,24 +1,24 @@
-const ClientController = require('./controller/clientController');
-const ClientService = require('./service/clientService');
-const ClientRepository = require('./repository/sqlite/clientRepository');
-const ClientModel = require('./model/clientModel');
+const { UserController } = require('./controller/user.controller');
+const { UserService } = require('./service/user.service');
+const { UserRepository } = require('./repository/user.repository');
+const { UserModel } = require('./model/user.model');
 
 /**
  * @param {import('express').Application} app
  * @param {import('rsdi').default} container
  */
-function init(app, container) {
+function bootstrap(app, container) {
   /**
-   * @type {import('./controller/clientController')} clientController
+   * @type {import('./controller/user.controller').userController}
    */
-  const clientController = container.get('ClientController');
-  clientController.configureRoutes(app);
+  const userController = container.get('UserController');
+  userController.configureRoutes(app);
 }
 
 module.exports = {
-  init,
-  ClientController,
-  ClientService,
-  ClientRepository,
-  ClientModel,
+  bootstrap,
+  UserController,
+  UserService,
+  UserRepository,
+  UserModel,
 };
