@@ -1,0 +1,88 @@
+{% extends "view/layout/base.view.html" %}
+
+{% block content %}
+  <main class="my-5">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <form action="/user/save" method="POST">
+          {% if user.id %}
+            <input type="hidden" value="{{ user.id }}" name="id" readonly/>
+          {% endif %}
+          
+          <div class="field">
+            <label class="label" for="firstname">First Name</label>
+            <div class="control">
+              <input class="input" id="firstname" name="firstname" type="text" value="{{ user.firstName }}" placeholder="{{ user.firstName }}" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="lastname">Last Name</label>
+            <div class="control">
+              <input class="input" id="lastname" name="lastname" type="text" value="{{ user.lastName }}" placeholder="{{ user.lastName }}" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label">Document Type</label>
+            <div class="control">
+              <div class="select">
+                <select name="document-type" required>
+                  <option value="">Select an option</option>
+                  <option value="identity card" {{ "selected" if user.documentType === "identity card" }}>Identity Card</option>
+                  <option value="passport" {{ "selected" if user.documentType === "passport" }}>Passport</option>
+                  <option value="driver's licence" {{ "selected" if user.documentType === "driver's licence" }}>Driver's Licence</option>
+                </select>
+              </div>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="document-number">Document Number</label>
+            <div class="control">
+              <input class="input" id="document-number" name="document-number" type="text" value="{{ user.documentNumber }}" placeholder="{{ user.documentNumber }}" required/>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label" for="address">Address</label>
+            <div class="control">
+              <input class="input" id="address" name="address" type="text" value="{{ user.address }}" placeholder="{{ user.address }}" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="phone-number">Phone Number</label>
+            <div class="control">
+              <input class="input" id="phone-number" name="phone-number" type="text" value="{{ user.phoneNumber }}" placeholder="{{ user.phoneNumber }}" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="email">Email</label>
+            <div class="control">
+              <input class="input" id="email" name="email" type="text" value="{{ user.email }}" placeholder="{{ user.email }}" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <label class="label" for="birthdate">Date of Birth</label>
+            <div class="control">
+              <input class="input" id="birthdate" name="birthdate" type="date" value="{{ user.birthDate }}" placeholder="{{ user.birthDate }}" required/>
+            </div>
+          </div>
+      
+          <div class="field">
+            <div class="control has-text-centered">
+              {% if user.id %}
+                <button class="button is-primary">Update Record</button>
+              {% else %}
+                <button class="button is-primary">Save Record</button>
+              {% endif %}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}

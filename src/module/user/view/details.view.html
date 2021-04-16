@@ -1,0 +1,70 @@
+{% extends "view/layout/base.view.html" %}
+
+{% block content %}
+  <main class="my-5">
+    <div class="container">
+      <div class="block is-display-flex is-justify-content-center">
+        <table class="table is-bordered is-striped is-fullwidth has-text-centered">
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+              <th>First Name</th>
+              <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+              <th>Last name</th>
+              <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+              <th>Document Type</th>
+              <td>{{ user.documentType }}</td>
+            </tr>
+            <tr>
+              <th>Document Number</th>
+              <td>{{ user.documentNumber }}</td>
+            </tr>
+            <tr>
+              <th>Address</th>
+              <td>{{ user.address }}</td>
+            </tr>
+            <tr>
+              <th>Phone Number</th>
+              <td>{{ user.phoneNumber }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+              <th>Birthdate</th>
+              <td>{{ user.birthDate }}</td>
+            </tr>
+            <tr>
+              <th>Created At</th>
+              <td>{{ user.createdAt }}</td>
+            </tr>
+            <tr>
+              <th>Last Updated</th>
+              <td>{{ user.lastUpdated }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <div class="buttons is-centered">
+          <a href="/user/update/{{ user.id }}" class="button is-warning">
+            <i class="fas fa-edit mr-2"></i>
+            Edit
+          </a>
+          <a href="/user/delete/{{ user.id }}" class="button is-danger">
+            <i class="fas fa-trash-alt mr-2"></i>
+            Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}
