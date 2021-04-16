@@ -1,4 +1,4 @@
-{% extends "view/layout/base.view.html" %}
+{% extends "common/view/layout/base.view.html" %}
 
 {% block content %}
   <main class="my-5">
@@ -47,8 +47,8 @@
               <td>{{ user.createdAt }}</td>
             </tr>
             <tr>
-              <th>Last Updated</th>
-              <td>{{ user.lastUpdated }}</td>
+              <th>Updated At</th>
+              <td>{{ user.updatedAt }}</td>
             </tr>
           </tbody>
         </table>

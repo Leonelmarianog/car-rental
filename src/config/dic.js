@@ -3,13 +3,13 @@ const { Sequelize } = require('sequelize');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const { CarController, CarService, CarRepository, CarModel } = require('../module/car/car.module');
-/* const {
-  ClientController,
-  ClientService,
-  ClientRepository,
-  ClientModel,
-} = require('../modules/client/module');
 const {
+  UserController,
+  UserService,
+  UserRepository,
+  UserModel,
+} = require('../module/user/user.module');
+/* const {
   RentController,
   RentService,
   RentRepository,
@@ -47,13 +47,13 @@ function configureCarModel(container) {
 
 /**
  * @param {DIContainer} container
- * @return {ClientModel} ClientModel
+ * @return {UserModel}
  */
-/* function configureClientModel(container) {
+function configureUserModel(container) {
   const sequelize = container.get('Sequelize');
-  ClientModel.setup(sequelize);
-  return ClientModel;
-} */
+  UserModel.setup(sequelize);
+  return UserModel;
+}
 
 /**
  * @param {DIContainer} container
@@ -119,14 +119,14 @@ function addCarModuleDefinitions(container) {
 /**
  * @param {DIContainer} container
  */
-/* function addClientModuleDefinitions(container) {
+function addUserModuleDefinitions(container) {
   container.addDefinitions({
-    ClientController: object(ClientController).construct(get('ClientService')),
-    ClientService: object(ClientService).construct(get('ClientRepository')),
-    ClientRepository: object(ClientRepository).construct(get('ClientModel')),
-    ClientModel: factory(configureClientModel),
+    UserController: object(UserController).construct(get('UserService')),
+    UserService: object(UserService).construct(get('UserRepository')),
+    UserRepository: object(UserRepository).construct(get('UserModel')),
+    UserModel: factory(configureUserModel),
   });
-} */
+}
 
 /**
  * @param {DIContainer} container
@@ -155,8 +155,8 @@ function configureDIC() {
   const container = new DIContainer();
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);
-  /*   addClientModuleDefinitions(container);
-  addRentModuleDefinitions(container); */
+  addUserModuleDefinitions(container);
+  /* addRentModuleDefinitions(container); */
   return container;
 }
 

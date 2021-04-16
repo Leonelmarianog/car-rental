@@ -4,8 +4,8 @@ const nunjucks = require('nunjucks');
 const { configureDIC } = require('./config/dic');
 const { errorHandlerMiddleware } = require('./module/common/middleware');
 const { bootstrap: bootstrapCarModule } = require('./module/car/car.module');
-/* const { init: initClientModule } = require('./modules/client/module');
-const { init: initRentModule } = require('./modules/rent/module'); */
+const { bootstrap: bootstrapUserModule } = require('./module/user/user.module');
+/* const { init: initRentModule } = require('./modules/rent/module'); */
 
 function bootstrap() {
   const app = express();
@@ -23,8 +23,8 @@ function bootstrap() {
   app.use(container.get('Session'));
 
   bootstrapCarModule(app, container);
-  /*   initClientModule(app, container);
-  initRentModule(app, container); */
+  bootstrapUserModule(app, container);
+  /* initRentModule(app, container); */
 
   app.use(errorHandlerMiddleware);
 

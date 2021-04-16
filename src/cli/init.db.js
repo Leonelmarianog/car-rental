@@ -1,8 +1,8 @@
 require('dotenv').config();
 const { configureDIC } = require('../config/dic');
 const { CarModel } = require('../module/car/car.module');
-/* const { ClientModel } = require('../modules/client/module');
-const { RentModel } = require('../modules/rent/module'); */
+const { UserModel } = require('../module/user/user.module');
+/* const { RentModel } = require('../modules/rent/module'); */
 
 const container = configureDIC();
 const mainDb = container.get('Sequelize');
@@ -11,8 +11,8 @@ const sessionStore = container.get('SessionStore');
 
 async function init() {
   await CarModel.setup(mainDb);
-  /*   await ClientModel.setup(mainDb);
-  await RentModel.setup(mainDb);
+  await UserModel.setup(mainDb);
+  /* await RentModel.setup(mainDb);
 
   await RentModel.setAssociations(CarModel, ClientModel); */
 
@@ -45,7 +45,7 @@ async function init() {
     },
   ]);
 
-  /*   const clients = await ClientModel.bulkCreate([
+  await UserModel.bulkCreate([
     {
       firstName: 'Pepe',
       lastName: 'Lopez',
@@ -68,7 +68,7 @@ async function init() {
     },
   ]);
 
-  await RentModel.bulkCreate([
+  /* await RentModel.bulkCreate([
     {
       fkCarId: cars[0].id,
       fkClientId: clients[0].id,
