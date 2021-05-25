@@ -58,6 +58,8 @@ class CarModel extends Model {
         paranoid: true,
       }
     );
+
+    return CarModel;
   }
 }
 

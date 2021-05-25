@@ -46,6 +46,8 @@ class ReservationModel extends Model {
         paranoid: true,
       }
     );
+
+    return ReservationModel;
   }
 
   /**
@@ -69,6 +71,8 @@ class ReservationModel extends Model {
       foreignKey: { name: 'fkUserId', field: 'fk_user_id' },
       constraints: false,
     });
+
+    return ReservationModel;
   }
 }
 
