@@ -134,7 +134,7 @@ class CarController {
       req.session.message = `Car with Id ${carId} successfully deleted.`;
       res.redirect(this.BASE_ROUTE);
     } catch (error) {
-      if (error instanceof NotDefinedException || NotFoundException) {
+      if (error instanceof NotDefinedException || error instanceof NotFoundException) {
         req.session.error = error.message;
         res.redirect(this.BASE_ROUTE);
       } else {
