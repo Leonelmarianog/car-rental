@@ -9,12 +9,12 @@ const {
   UserRepository,
   UserModel,
 } = require('../module/user/user.module');
-/* const {
-  RentController,
-  RentService,
-  RentRepository,
-  RentModel,
-} = require('../modules/rent/module'); */
+const {
+  ReservationController,
+  ReservationService,
+  ReservationRepository,
+  ReservationModel,
+} = require('../module/reservation/reservation.module');
 
 /**
  * @returns {Sequelize} Database connection
@@ -38,6 +38,7 @@ function configureSessionDatabase() {
 
 /**
  * @param {DIContainer} container
+ * @returns {CarModel}
  */
 function configureCarModel(container) {
   const sequelize = container.get('Sequelize');
@@ -47,7 +48,7 @@ function configureCarModel(container) {
 
 /**
  * @param {DIContainer} container
- * @return {UserModel}
+ * @returns {UserModel}
  */
 function configureUserModel(container) {
   const sequelize = container.get('Sequelize');
@@ -57,13 +58,13 @@ function configureUserModel(container) {
 
 /**
  * @param {DIContainer} container
- * @return {RentModel} RentModel
+ * @returns {ReservationModel}
  */
-/* function configureRentModel(container) {
-  RentModel.setup(container.get('Sequelize'));
-  RentModel.setAssociations(container.get('CarModel'), container.get('ClientModel'));
-  return RentModel;
-} */
+function configureReservationModel(container) {
+  ReservationModel.setup(container.get('Sequelize'));
+  ReservationModel.setAssociations(container.get('CarModel'), container.get('UserModel'));
+  return ReservationModel;
+}
 
 /**
  * @param {DIContainer} container
@@ -131,22 +132,25 @@ function addUserModuleDefinitions(container) {
 /**
  * @param {DIContainer} container
  */
-/* function addRentModuleDefinitions(container) {
+function addReservationModuleDefinitions(container) {
   container.addDefinitions({
-    RentController: object(RentController).construct(
-      get('RentService'),
+    ReservationController: object(ReservationController).construct(
+      get('ReservationService'),
       get('CarService'),
-      get('ClientService')
+      get('UserService')
     ),
-    RentService: object(RentService).construct(get('RentRepository')),
-    RentRepository: object(RentRepository).construct(
-      get('RentModel'),
+    ReservationService: object(ReservationService).construct(
+      get('ReservationRepository'),
+      get('CarRepository')
+    ),
+    ReservationRepository: object(ReservationRepository).construct(
+      get('ReservationModel'),
       get('CarModel'),
-      get('ClientModel')
+      get('UserModel')
     ),
-    RentModel: factory(configureRentModel),
+    ReservationModel: factory(configureReservationModel),
   });
-} */
+}
 
 /**
  * @returns {DIContainer}
@@ -156,7 +160,7 @@ function configureDIC() {
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);
   addUserModuleDefinitions(container);
-  /* addRentModuleDefinitions(container); */
+  addReservationModuleDefinitions(container);
   return container;
 }
 

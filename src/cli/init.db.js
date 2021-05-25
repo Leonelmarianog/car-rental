@@ -2,7 +2,7 @@ require('dotenv').config();
 const { configureDIC } = require('../config/dic');
 const { CarModel } = require('../module/car/car.module');
 const { UserModel } = require('../module/user/user.module');
-/* const { RentModel } = require('../modules/rent/module'); */
+const { ReservationModel } = require('../module/reservation/reservation.module');
 
 const container = configureDIC();
 const mainDb = container.get('Sequelize');
@@ -12,9 +12,9 @@ const sessionStore = container.get('SessionStore');
 async function init() {
   await CarModel.setup(mainDb);
   await UserModel.setup(mainDb);
-  /* await RentModel.setup(mainDb);
+  await ReservationModel.setup(mainDb);
 
-  await RentModel.setAssociations(CarModel, ClientModel); */
+  await ReservationModel.setAssociations(CarModel, UserModel);
 
   await mainDb.sync({ force: true });
   await sessionDb.sync({ force: true });
@@ -67,29 +67,6 @@ async function init() {
       birthDate: '1995-02-07',
     },
   ]);
-
-  /* await RentModel.bulkCreate([
-    {
-      fkCarId: cars[0].id,
-      fkClientId: clients[0].id,
-      pricePerDay: cars[0].pricePerDay,
-      startDate: '2020-05-07',
-      finishDate: '2020-06-07',
-      totalPrice: 6200,
-      paymentMethod: 'credit card',
-      paid: false,
-    },
-    {
-      fkCarId: cars[1].id,
-      fkClientId: clients[1].id,
-      pricePerDay: cars[1].pricePerDay,
-      startDate: '2020-05-12',
-      finishDate: '2020-05-19',
-      totalPrice: 2450,
-      paymentMethod: 'credit card',
-      paid: true,
-    },
-  ]); */
 }
 
 init();

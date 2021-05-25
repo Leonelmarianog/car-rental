@@ -5,7 +5,9 @@ const { configureDIC } = require('./config/dic');
 const { errorHandlerMiddleware } = require('./module/common/middleware');
 const { bootstrap: bootstrapCarModule } = require('./module/car/car.module');
 const { bootstrap: bootstrapUserModule } = require('./module/user/user.module');
-/* const { init: initRentModule } = require('./modules/rent/module'); */
+const {
+  bootstrap: bootstrapReservationModule,
+} = require('./module/reservation/reservation.module');
 
 function bootstrap() {
   const app = express();
@@ -24,7 +26,7 @@ function bootstrap() {
 
   bootstrapCarModule(app, container);
   bootstrapUserModule(app, container);
-  /* initRentModule(app, container); */
+  bootstrapReservationModule(app, container);
 
   app.use(errorHandlerMiddleware);
 

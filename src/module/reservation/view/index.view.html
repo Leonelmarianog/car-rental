@@ -1,4 +1,4 @@
-{% extends "views/layout/base.html" %}
+{% extends "common/view/layout/base.view.html" %}
 
 {% block content %}
   <main class="my-5">
@@ -16,7 +16,7 @@
       {% endif %}
   
       <div class="block has-text-centered">
-        <a class="button is-primary" href="/rent/create">Add New Record</a>
+        <a class="button is-primary" href="/reservation/create">Add New Record</a>
       </div>
   
       <div class="block">
@@ -25,22 +25,22 @@
             <tr>
               <th>ID</th>
               <th>Car</th>
-              <th>Client</th>
+              <th>User</th>
               <th>Total Price</th>
-              <th>Paid</th>
+              <th>Status</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {% for rent in rents %}
+            {% for reservation in reservations %}
             <tr>
-              <td>{{ rent.id }}</td>
-              <td>{{ rent.Car.brand }} {{ rent.Car.model }}</td>
-              <td>{{ rent.Client.firstName }} {{ rent.Client.lastName }}</td>
-              <td>{{ rent.totalPrice }}</td>
-              <td>{{ rent.paid }}</td>
+              <td>{{ reservation.id }}</td>
+              <td>{{ reservation.car.brand }} {{ reservation.car.model }}</td>
+              <td>{{ reservation.user.firstName }} {{ reservation.user.lastName }}</td>
+              <td>{{ reservation.totalPrice }}</td>
+              <td>{{ reservation.status }}</td>
               <td>
-                <a href="/rent/view/{{ rent.id }}" class="button is-info">
+                <a href="/reservation/view/{{ reservation.id }}" class="button is-info">
                   <i class="far fa-eye mr-2"></i>
                   Details
                 </a>

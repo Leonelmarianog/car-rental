@@ -1,0 +1,106 @@
+{% extends "common/view/layout/base.view.html" %}
+
+{% block content %}
+  <main class="my-5">
+    <div class="container">
+      {% if message %}
+      <div class="block">
+        <div class="notification is-success">{{ message }}</div>
+      </div>
+    {% endif %}
+
+    {% if error %}
+      <div class="block">
+        <div class="notification is-danger">{{ error }}</div>
+      </div>
+    {% endif %}
+    
+      <div class="block is-display-flex is-justify-content-center">
+        <table class="table is-bordered is-striped is-fullwidth has-text-centered">
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <td>{{ reservation.id }}</td>
+            </tr>
+            <tr>
+              <th>Car</th>
+              <td>
+                <a href="/car/view/{{ reservation.car.id }}">
+                  {{ reservation.car.brand }} {{ reservation.car.model }}
+                </a>                
+              </td>
+            </tr>
+            <tr>
+              <th>User</th>
+              <td>
+                <a href="/car/view/{{ reservation.user.id }}">
+                  {{ reservation.user.firstName }} {{ reservation.user.lastName }}
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <th>Price per day</th>
+              <td>${{ reservation.pricePerDay }}</td>
+            </tr>
+            <tr>
+              <th>Start Date</th>
+              <td>{{ reservation.startDate }}</td>
+            </tr>
+            <tr>
+              <th>Finish Date</th>
+              <td>{{ reservation.finishDate }}</td>
+            </tr>
+            <tr>
+              <th>Total Price</th>
+              <td>${{ reservation.totalPrice }}</td>
+            </tr>
+            <tr>
+              <th>Payment Method</th>
+              <td>{{ reservation.paymentMethod }}</td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td>{{ reservation.status }}</td>
+            </tr>
+            <tr>
+              <th>Created At</th>
+              <td>{{ reservation.createdAt }}</td>
+            </tr>
+            <tr>
+              <th>Updated At</th>
+              <td>{{ reservation.updatedAt }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <div class="buttons is-centered">
+          {% if reservation.status === "Pending" %}
+          <a href="/reservation/pay/{{ reservation.id }}" class="button is-primary">
+            <i class="fas fa-edit mr-2"></i>
+            Set as paid
+          </a>
+          {% elseif reservation.status === "Paid" %}
+          <a href="/reservation/finish/{{ reservation.id }}" class="button is-primary">
+            <i class="fas fa-edit mr-2"></i>
+            Set as finished
+          </a>
+          {% elseif reservation.status === "Finished" %}
+          <a href="/reservation/reset/{{ reservation.id }}" class="button is-primary">
+            <i class="fas fa-edit mr-2"></i>
+            Set as pending
+          </a>
+          {% endif %}
+          <a href="/reservation/update/{{ reservation.id }}" class="button is-warning">
+            <i class="fas fa-edit mr-2"></i>
+            Edit
+          </a>
+          <a href="/reservation/delete/{{ reservation.id }}" class="button is-danger">
+            <i class="fas fa-trash-alt mr-2"></i>
+            Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

@@ -1,12 +1,13 @@
-{% extends "views/layout/base.html" %}
+{% extends "common/view/layout/base.view.html" %}
 
 {% block content %}
   <main class="my-5">
     <div class="columns is-centered">
       <div class="column is-half">
-        <form action="/rent/save" method="POST">
-          {% if rent.id %}
-            <input type="hidden" value="{{ rent.id }}" name="id" readonly/>
+        <form action="/reservation/save" method="POST">
+          {% if reservation %}
+            <input type="hidden" value="{{ reservation.id }}" name="id" readonly/>
+            <input type="hidden" value="{{ reservation.createdAt }}" name="created-at" readonly/>
           {% endif %}
     
           <div class="field">
@@ -16,7 +17,7 @@
                 <select name="fk-car-id" required>
                   <option value="">Select a car</option>
                   {% for car in cars %}
-                    <option value="{{ car.id }}" {{ "selected" if rent.fkCarId === car.id }}>{{ car.brand }} {{ car.model }}</option>
+                    <option value="{{ car.id }}" {{ "selected" if reservation.fkCarId === car.id }}>{{ car.brand }} {{ car.model }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -24,13 +25,13 @@
           </div>
     
           <div class="field">
-            <label class="label">Client</label>
+            <label class="label">User</label>
             <div class="control">
               <div class="select">
-                <select name="fk-client-id" required>
-                  <option value="">Select a client</option>
-                  {% for client in clients %}
-                    <option value="{{ client.id }}" {{ "selected" if rent.fkClientId === client.id }}>{{ client.firstName }} {{ client.lastName }}</option>
+                <select name="fk-user-id" required>
+                  <option value="">Select a user</option>
+                  {% for user in users %}
+                    <option value="{{ user.id }}" {{ "selected" if reservation.fkUserId === user.id }}>{{ user.firstName }} {{ user.lastName }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -38,30 +39,23 @@
           </div>
     
           <div class="field">
-            <label class="label" for="price-per-day">Price per day</label>
+            <label class="label" for="price-per-day">Price per day (takes precedence over car's price)</label>
             <div class="control">
-              <input class="input" id="price-per-day" name="price-per-day" type="text" value="{{ rent.pricePerDay }}" placeholder="{{ rent.pricePerDay }}" required/>
+              <input class="input" id="price-per-day" name="price-per-day" type="number" value="{{ reservation.pricePerDay }}" placeholder="{{ reservation.pricePerDay }}"/>
             </div>
           </div>
         
           <div class="field">
             <label class="label" for="start-date">Start Date</label>
             <div class="control">
-              <input class="input" id="start-date" name="start-date" type="date" value="{{ rent.startDate }}" placeholder="{{ rent.startDate }}" required/>
+              <input class="input" id="start-date" name="start-date" type="datetime-local" value="{{ reservation.startDate.toISOString() | truncate(19, true, "")  if reservation }}" required/>
             </div>
           </div>
     
           <div class="field">
             <label class="label" for="finish-date">Finish Date</label>
             <div class="control">
-              <input class="input" id="finish-date" name="finish-date" type="date" value="{{ rent.finishDate }}" placeholder="{{ rent.finishDate }}" required/>
-            </div>
-          </div>
-    
-          <div class="field">
-            <label class="label" for="total-price">Total Price</label>
-            <div class="control">
-              <input class="input" id="total-price" name="total-price" type="text" value="{{ rent.totalPrice }}" placeholder="{{ rent.totalPrice }}" required/>
+              <input class="input" id="finish-date" name="finish-date" type="datetime-local" value="{{ reservation.finishDate.toISOString() | truncate(19, true, "")  if reservation }}" required/>
             </div>
           </div>
     
@@ -71,30 +65,32 @@
               <div class="select">
                 <select name="payment-method" required>
                   <option value="">Select an option</option>
-                  <option value="cash" {{ "selected" if rent.paymentMethod === "cash" }}>Cash</option>
-                  <option value="credit card" {{ "selected" if rent.paymentMethod === "credit card" }}>Credit Card</option>
+                  <option value="cash" {{ "selected" if reservation.paymentMethod === "cash" }}>Cash</option>
+                  <option value="credit card" {{ "selected" if reservation.paymentMethod === "credit card" }}>Credit Card</option>
                 </select>
               </div>
             </div>
           </div>
-    
+
+          {% if reservation === undefined %}
           <div class="field">
-            <label class="label">Paid</label>
+            <label class="label">Pays on reserve?</label>
             <div class="control">
               <label class="radio">
-                <input type="radio" name="paid" value="1" {{ "checked" if rent.paid === true }} required/>
+                <input type="radio" name="status" value="Paid" {{ "checked" if reservation.status === "Paid" }} required/>
                 Yes
               </label>
               <label class="radio">
-                <input type="radio" name="paid" value="" {{ "checked" if rent.paid === false }} required/>
+                <input type="radio" name="status" value="Pending" {{ "checked" if reservation.status === "Pending" }} required/>
                 No
               </label>
             </div>
           </div>
+          {% endif %}
     
           <div class="field">
             <div class="control has-text-centered">
-              {% if rent.id %}
+              {% if reservation %}
                 <button class="button is-primary">Update Record</button>
               {% else %}
                 <button class="button is-primary">Save Record</button>
