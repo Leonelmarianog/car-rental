@@ -155,7 +155,7 @@ function addReservationModuleDefinitions(container) {
 /**
  * @returns {DIContainer}
  */
-function configureDIC() {
+function bootstrap() {
   const container = new DIContainer();
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);
@@ -164,4 +164,4 @@ function configureDIC() {
   return container;
 }
 
-module.exports = { configureDIC };
+module.exports = { bootstrap };
