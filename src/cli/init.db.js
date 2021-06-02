@@ -1,10 +1,10 @@
 require('dotenv').config();
-const { configureDIC } = require('../config/dic');
+const { bootstrap: bootstrapDIC } = require('../config/dic');
 const { CarModel } = require('../module/car/car.module');
 const { UserModel } = require('../module/user/user.module');
 const { ReservationModel } = require('../module/reservation/reservation.module');
 
-const container = configureDIC();
+const container = bootstrapDIC();
 const mainDb = container.get('Sequelize');
 const sessionDb = container.get('SessionSequelize');
 const sessionStore = container.get('SessionStore');
