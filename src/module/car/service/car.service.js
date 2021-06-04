@@ -12,9 +12,9 @@ class CarService {
   /**
    * @returns {Promise<Array<import('../entity/car.entity').Car>>}
    */
-  async getAll() {
-    const cars = await this.carRepository.getAll();
-    return cars;
+  async getAll(limit, offset) {
+    const data = await this.carRepository.getAll(limit, offset);
+    return data;
   }
 
   /**

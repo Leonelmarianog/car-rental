@@ -13,10 +13,10 @@ class CarRepository {
   /**
    * @returns {Promise<Array<import('../entity/car.entity').Car>>}
    */
-  async getAll() {
-    const carsData = await this.CarModel.findAll();
+  async getAll(limit, offset) {
+    const { count, rows: carsData } = await this.CarModel.findAndCountAll({ limit, offset });
     const cars = carsData.map((carData) => fromModelToEntity(carData));
-    return cars;
+    return { count, rows: cars };
   }
 
   /**

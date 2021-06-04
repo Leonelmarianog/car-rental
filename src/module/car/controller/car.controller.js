@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 const { fromDataToEntity } = require('../mapper/car.mapper');
 const { NotDefinedException, NotFoundException } = require('../../common/exception');
+const { getLimitAndOffset, paginate } = require('../../common/utils/pagination');
 
 class CarController {
   /**
@@ -30,9 +31,21 @@ class CarController {
    */
   async index(req, res, next) {
     try {
-      const cars = await this.carService.getAll();
+      const { page, size } = req.query;
+      const { limit, offset } = getLimitAndOffset(page, size);
+      const data = await this.carService.getAll(limit, offset);
+      const { results: cars, count, currentPage, totalPages } = paginate(data, page, limit);
+      console.log(count, currentPage, totalPages);
       const { message, error } = req.session;
-      res.render('car/view/index.view.html', { cars, message, error });
+      const numberOfButtons = 2;
+      res.render('car/view/index.view.html', {
+        cars,
+        message,
+        error,
+        numberOfButtons,
+        pages: totalPages,
+        activePage: currentPage,
+      });
       req.session.message = null;
       req.session.error = null;
     } catch (error) {
